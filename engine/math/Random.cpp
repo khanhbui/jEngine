@@ -8,6 +8,8 @@
 
 #include "Random.h"
 
+#include <cstdlib>
+
 NAMESPACE_USING
 
 Random::Random() : Ref("Random"),

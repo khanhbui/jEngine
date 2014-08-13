@@ -9,9 +9,10 @@
 #include "MainScene.h"
 #include "Message.h"
 #include "Cell.h"
-#include "Math.h"
+#include "MathUtil.h"
 
 #include <vector>
+#include <cstdlib>
 
 NAMESPACE_USING;
 
@@ -96,11 +97,11 @@ void MainScene::__reset()
     __current = __grid[MAX_W >> 1][MAX_H >> 1];
     __current->visible = true;
     __current->setState(0);
-    __current->setColor(Math::Instance()->randomIn(0, 4));
+    __current->setColor(MathUtil::Instance()->randomIn(0, 4));
 
-    __color0->setColor(Math::Instance()->randomIn(0, 4));
-    __color1->setColor(Math::Instance()->randomIn(0, 4));
-    __color2->setColor(Math::Instance()->randomIn(0, 4));
+    __color0->setColor(MathUtil::Instance()->randomIn(0, 4));
+    __color1->setColor(MathUtil::Instance()->randomIn(0, 4));
+    __color2->setColor(MathUtil::Instance()->randomIn(0, 4));
 }
 
 void MainScene::__move(int dir)
@@ -153,7 +154,7 @@ void MainScene::__move(int dir)
 
         __color0->setColor(__color1->color);
         __color1->setColor(__color2->color);
-        __color2->setColor(Math::Instance()->randomIn(0, 4));
+        __color2->setColor(MathUtil::Instance()->randomIn(0, 4));
     }
 }
 

@@ -46,7 +46,7 @@
 		5BC04951198A3F5F00423EAD /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC0494F198A3F5F00423EAD /* Scene.cpp */; };
 		5BC04954198A408D00423EAD /* SceneDirector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC04952198A408D00423EAD /* SceneDirector.cpp */; };
 		5BC04957198A447F00423EAD /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC04955198A447F00423EAD /* Random.cpp */; };
-		5BC0495A198A479D00423EAD /* Math.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC04958198A479D00423EAD /* Math.cpp */; };
+		5BC0495A198A479D00423EAD /* MathUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC04958198A479D00423EAD /* MathUtil.cpp */; };
 		5BC04969198A5BBD00423EAD /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC04967198A5BBD00423EAD /* MainScene.cpp */; };
 		5BC6D1811998F39500730FD1 /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC6D17F1998F39500730FD1 /* Action.cpp */; };
 		5BC6D1841998F47C00730FD1 /* ActionPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC6D1821998F47C00730FD1 /* ActionPlayer.cpp */; };
@@ -201,8 +201,8 @@
 		5BC04953198A408D00423EAD /* SceneDirector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDirector.h; sourceTree = "<group>"; };
 		5BC04955198A447F00423EAD /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
 		5BC04956198A447F00423EAD /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Random.h; sourceTree = "<group>"; };
-		5BC04958198A479D00423EAD /* Math.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Math.cpp; sourceTree = "<group>"; };
-		5BC04959198A479D00423EAD /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
+		5BC04958198A479D00423EAD /* MathUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MathUtil.cpp; sourceTree = "<group>"; };
+		5BC04959198A479D00423EAD /* MathUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathUtil.h; sourceTree = "<group>"; };
 		5BC04967198A5BBD00423EAD /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainScene.cpp; sourceTree = "<group>"; };
 		5BC04968198A5BBD00423EAD /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
 		5BC6D17F1998F39500730FD1 /* Action.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Action.cpp; sourceTree = "<group>"; };
@@ -665,8 +665,8 @@
 			children = (
 				5BC04955198A447F00423EAD /* Random.cpp */,
 				5BC04956198A447F00423EAD /* Random.h */,
-				5BC04958198A479D00423EAD /* Math.cpp */,
-				5BC04959198A479D00423EAD /* Math.h */,
+				5BC04958198A479D00423EAD /* MathUtil.cpp */,
+				5BC04959198A479D00423EAD /* MathUtil.h */,
 				5BDA0D97198C98C400C7526F /* Mat4.cpp */,
 				5BDA0D98198C98C400C7526F /* Mat4.h */,
 			);
@@ -833,7 +833,7 @@
 				5BC04940198A168600423EAD /* OALSuspendHandler.m in Sources */,
 				ED4F705E198957840060BB66 /* Engine.cpp in Sources */,
 				5BC04944198A168600423EAD /* NSMutableDictionary+WeakReferences.m in Sources */,
-				5BC0495A198A479D00423EAD /* Math.cpp in Sources */,
+				5BC0495A198A479D00423EAD /* MathUtil.cpp in Sources */,
 				5BD579831999D6090012D804 /* Message.cpp in Sources */,
 				5BC6D1841998F47C00730FD1 /* ActionPlayer.cpp in Sources */,
 				ED4F705D198957840060BB66 /* Ref.cpp in Sources */,

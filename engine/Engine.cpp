@@ -12,7 +12,7 @@
 #include "Timer.h"
 #include "SceneDirector.h"
 #include "Notifier.h"
-#include "Math.h"
+#include "MathUtil.h"
 
 #include <math.h>
 #include <sys/time.h>
@@ -203,8 +203,8 @@ void Engine::Create()
 {
     if (!Engine::_instance)
     {
-        Math::Create();
-        Math::Instance()->randomize((int)Timer::getCurrentMillSecond());
+        MathUtil::Create();
+        MathUtil::Instance()->randomize((int)Timer::getCurrentMillSecond());
 
         PoolManager::Create();
         Notifier::Create();

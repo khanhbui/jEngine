@@ -87,7 +87,7 @@ void GL::setupGL()
     glGenFramebuffers(1, &__defaultFrameBufferId);
 #elif ANDROID
     LOGE("Create FrameBuffer for Android");
-    m_defaultFrameBufferId = (GLuint) 0;
+    __defaultFrameBufferId = (GLuint) 0;
 #endif
     glBindFramebuffer(GL_FRAMEBUFFER, __defaultFrameBufferId);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, __colorRenderBufferId);

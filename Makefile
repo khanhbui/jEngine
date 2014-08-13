@@ -22,3 +22,10 @@ atlas: # create atlas
 
 scale: # scale images upto 2 times
 	cd tool && ruby scale_images.rb
+
+jni-build:
+	cd android/jni && ndk-build
+
+jni-clean:
+	cd android/jni && ndk-build clean
+

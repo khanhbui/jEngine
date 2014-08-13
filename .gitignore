@@ -2,3 +2,9 @@ data/tool/atlas.png
 data/tool/atlas.txt
 *.class
 xcuserdata
+bin/
+gen/
+obj/
+.classpath
+*.properties
+.settings/

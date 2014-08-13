@@ -6,19 +6,19 @@
 //  Copyright (c) 2014 Khanh Bui. All rights reserved.
 //
 
-#ifndef __jEngine__Math__
-#define __jEngine__Math__
+#ifndef __jEngine__MathUtil__
+#define __jEngine__MathUtil__
 
 #include "Ref.h"
 #include "Random.h"
 
-#include <cmath>
+#include <math.h>
 
 NAMESPACE_BEGIN
 
 class Random;
 
-class Math : public Ref
+class MathUtil : public Ref
 {
 private:
     static float * m_sin;
@@ -55,12 +55,12 @@ private:
     static Random * __randomizer;
 
 protected:
-    static Math * _instance;
+    static MathUtil * _instance;
 
-    Math();
+    MathUtil();
 
 public:
-    ~Math();
+    ~MathUtil();
 
     static void randomize(long newSeed);
 
@@ -80,7 +80,7 @@ public:
     static float sin(float Angle)
     {
         Angle = fix(Angle);
-        return Math::m_sin[(int)(Angle*4)];
+        return MathUtil::m_sin[(int)(Angle*4)];
     };
     
     static float cos(float Angle)
@@ -128,107 +128,107 @@ public:
     
     static float ease_quadIn(int percentage)
     {
-        return Math::m_easeQuartIn[percentage];
+        return MathUtil::m_easeQuartIn[percentage];
     }
     
     static float ease_quadOut(int percentage)
     {
-        return Math::m_easeQuadOut[percentage];
+        return MathUtil::m_easeQuadOut[percentage];
     }
     
     static float ease_quadInOut(int percentage)
     {
-        return Math::m_easeQuadInOut[percentage];
+        return MathUtil::m_easeQuadInOut[percentage];
     }
     
     static float ease_cubeIn(int percentage)
     {
-        return Math::m_easeCubeIn[percentage];
+        return MathUtil::m_easeCubeIn[percentage];
     }
     
     static float ease_cubeOut(int percentage)
     {
-        return Math::m_easeCubeOut[percentage];
+        return MathUtil::m_easeCubeOut[percentage];
     }
     
     static float ease_cubeInOut(int percentage)
     {
-        return Math::m_easeCubeInOut[percentage];
+        return MathUtil::m_easeCubeInOut[percentage];
     }
     
     static float ease_quartIn(int percentage)
     {
-        return Math::m_easeQuartIn[percentage];
+        return MathUtil::m_easeQuartIn[percentage];
     }
     
     static float ease_quartOut(int percentage)
     {
-        return Math::m_easeQuartOut[percentage];
+        return MathUtil::m_easeQuartOut[percentage];
     }
     
     static float ease_quartInOut(int percentage)
     {
-        return Math::m_easeQuartInOut[percentage];
+        return MathUtil::m_easeQuartInOut[percentage];
     }
     
     static float ease_quintIn(int percentage)
     {
-        return Math::m_easeQuintIn[percentage];
+        return MathUtil::m_easeQuintIn[percentage];
     }
     
     static float ease_quintOut(int percentage)
     {
-        return Math::m_easeQuintOut[percentage];
+        return MathUtil::m_easeQuintOut[percentage];
     }
     
     static float ease_quintInOut(int percentage)
     {
-        return Math::m_easeQuintInOut[percentage];
+        return MathUtil::m_easeQuintInOut[percentage];
     }
     
     static float ease_elasticIn(int percentage)
     {
-        return Math::m_easeElasticIn[percentage];
+        return MathUtil::m_easeElasticIn[percentage];
     }
     
     static float ease_elasticOut(int percentage)
     {
-        return Math::m_easeElasticOut[percentage];
+        return MathUtil::m_easeElasticOut[percentage];
     }
     
     static float ease_elasticInOut(int percentage)
     {
-        return Math::m_easeElasticInOut[percentage];
+        return MathUtil::m_easeElasticInOut[percentage];
     }
     
     static float ease_backIn(int percentage)
     {
-        return Math::m_easeElasticIn[percentage];
+        return MathUtil::m_easeElasticIn[percentage];
     }
     
     static float ease_backOut(int percentage)
     {
-        return Math::m_easeElasticOut[percentage];
+        return MathUtil::m_easeElasticOut[percentage];
     }
     
     static float ease_backInOut(int percentage)
     {
-        return Math::m_easeElasticInOut[percentage];
+        return MathUtil::m_easeElasticInOut[percentage];
     }
     
     static float ease_bounceIn(int percentage)
     {
-        return Math::m_easeBounceIn[percentage];
+        return MathUtil::m_easeBounceIn[percentage];
     }
     
     static float ease_bounceOut(int percentage)
     {
-        return Math::m_easeBounceOut[percentage];
+        return MathUtil::m_easeBounceOut[percentage];
     }
     
     static float ease_bounceInOut(int percentage)
     {
-        return Math::m_easeBounceInOut[percentage];
+        return MathUtil::m_easeBounceInOut[percentage];
     }
     
     static void rotatePoint(int &X, int &Y, float Pivot_x, float Pivot_y, int Angle)
@@ -242,23 +242,23 @@ public:
         Y = Pivot_y + (sin(Angle) * dx + cos(Angle) * dy);
     }
     
-    static Math * Instance()
+    static MathUtil * Instance()
     {
-        return Math::_instance;
+        return MathUtil::_instance;
     }
     
     static void Create()
     {
-        if (!Math::_instance)
+        if (!MathUtil::_instance)
         {
-            Math::__randomizer = new Random();
-            Math::_instance = new Math();
+            MathUtil::__randomizer = new Random();
+            MathUtil::_instance = new MathUtil();
         }
     }
     
     static void Delete()
     {
-        RELEASE(Math::_instance);
+        RELEASE(MathUtil::_instance);
     }
 
 private:
