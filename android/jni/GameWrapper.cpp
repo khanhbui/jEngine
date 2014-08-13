@@ -32,6 +32,7 @@
 
 #include "Engine.h"
 #include "GameEvent.h"
+#include "MainScene.h"
 
 int touches_x[10];
 int touches_y[10];
@@ -96,6 +97,7 @@ void setAtlas(int aTextureID, const char* atlas, int len)
 	j::Engine::Instance()->setup();
 	j::Engine::Instance()->resize(width , height);
 	j::Engine::Instance()->setTextureAtlas(aTextureID, atlas, len);
+	j::Engine::Instance()->setDefaultScene(new MainScene());
 	j::Engine::Instance()->onResume();
 
 	isReady = true;

@@ -102,6 +102,8 @@ void MainScene::__reset()
     __color0->setColor(MathUtil::Instance()->randomIn(0, 4));
     __color1->setColor(MathUtil::Instance()->randomIn(0, 4));
     __color2->setColor(MathUtil::Instance()->randomIn(0, 4));
+
+    __isOver = false;
 }
 
 void MainScene::__move(int dir)

@@ -33,7 +33,7 @@
         </activity>
         <activity
             android:name="jk.game.GameActivity"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
             android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
              >
         </activity>
