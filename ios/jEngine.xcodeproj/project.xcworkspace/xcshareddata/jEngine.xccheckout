@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7EA67004-433A-4DC4-901F-73B7D3EEF2F3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>jEngine</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D6ED0E79-4CC2-4920-A65B-F96E7DAF1917</key>
+		<string>https://github.com/khanhbui/jEngine.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ios/jEngine/jEngine.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D6ED0E79-4CC2-4920-A65B-F96E7DAF1917</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/khanhbui/jEngine.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D6ED0E79-4CC2-4920-A65B-F96E7DAF1917</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D6ED0E79-4CC2-4920-A65B-F96E7DAF1917</string>
+			<key>IDESourceControlWCCName</key>
+			<string>jEngine</string>
+		</dict>
+	</array>
+</dict>
+</plist>
