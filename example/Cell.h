@@ -16,21 +16,29 @@ NAMESPACE_USING;
 class Cell : public Sprite
 {
 private:
-    Sprite * __begin;
-    Sprite * __end;
+    Sprite * __bomb;
+    
+    int __isBomb;
 
 public:
     Cell(int GridX, int GridY, int Color);
-    ~Cell();
+    virtual ~Cell();
+
+    static const int SIZE = 40;
+    static const int MAX_COLORS = 4;
+    static const int MAX_BOMBS = 6;
 
     int gridX;
     int gridY;
-    int color;
-    int state;
 
-    void setState(int State);
+    int color;
 
     void setColor(int Color);
+
+    void setIsBomb(int IsBomb);
+    int getIsBomb() const;
+
+    void countDownBomb();
 };
 
 #endif /* defined(__jEngine__Cell__) */

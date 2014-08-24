@@ -125,7 +125,6 @@ Texture ** Engine::findImages(const char * FileName, int &Count)
     {
         if (_images[i])
         {
-            LOGD("=== %s\n", _images[i]->fileName);
             int j = 0;
 
             for (; j < strlen(FileName); j++)
@@ -234,9 +233,9 @@ void Engine::addTextureAtlas(unsigned int TextureId, const char * Description, i
         int i=0;
         while (_images[i] && i < MAX_IMAGES)
         {
-            if (_images[i]->m_textureId <= 0)
+            if (_images[i]->textureId <= 0)
             {
-                _images[i]->m_textureId = TextureId;
+                _images[i]->textureId = TextureId;
             }
             i ++;
         }

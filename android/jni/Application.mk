@@ -1,7 +1,7 @@
-NDK_TOOLCHAIN_VERSION=4.8
+NDK_TOOLCHAIN_VERSION=4.9
 APP_STL := gnustl_static
 
-APP_PLATFORM := android-15
+APP_PLATFORM := android-13
 APP_ABI := all
 
 #APP_STL := stlport_static

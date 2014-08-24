@@ -11,20 +11,25 @@
 
 #include "Scene.h"
 #include "ObserverInterface.h"
+#include "Font.h"
 #include "Sprite.h"
 
 NAMESPACE_USING
 
 class Cell;
+class GameOver;
 
-#define MAX_W 9
-#define MAX_H 13
+#define MAX_W 7
+#define MAX_H 9
 
 class MainScene : public Scene, public ObserverInterface
 {
 private:
     Cell *** __grid;
     Cell * __current;
+    
+    Sprite * __begin;
+    Sprite * __end;
 
     int __pressedX;
     int __pressedY;
@@ -33,6 +38,10 @@ private:
     Cell * __color1;
     Cell * __color2;
 
+    Font * __font;
+    GameOver * __gameOver;
+
+    int __score;
     bool __isOver;
 
     void __reset();

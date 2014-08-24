@@ -430,9 +430,9 @@ void GL::render()
     
     cmdRender(__upScaleWidth, 0.0f, 0.0f, __upScaleHeight, __offscreenTextureU, __offscreenTextureV, 0.0f, 0.0f, 1.0f);
     __renderToUpscale();
-    
-//    cmdRender(__width - ((__width - __fitWidth) >> 1), ((__height - __fitHeight) >> 1), ((__width - __fitWidth) >> 1), __height - ((__height - __fitHeight) >> 1), __upscaleTextureU, __upscaleTextureV, 0.0f, 0.0f, 1.0f);
-    cmdRender(__fitWidth, 0, 0, __fitHeight, __upscaleTextureU, __upscaleTextureV, 0.0f, 0.0f, 1.0f);
+
+    cmdRender(__width - ((__width - __fitWidth) >> 1), ((__height - __fitHeight) >> 1), ((__width - __fitWidth) >> 1), __height - ((__height - __fitHeight) >> 1), __upscaleTextureU, __upscaleTextureV, 0.0f, 0.0f, 1.0f);
+//    cmdRender(__fitWidth, 0, 0, __fitHeight, __upscaleTextureU, __upscaleTextureV, 0.0f, 0.0f, 1.0f);
     __renderToSceen();
 }
 
@@ -477,14 +477,19 @@ void GL::cmdRender(int dest_x0, int dest_y0, int dest_x1, int dest_y1, float tex
 
 void GL::cmdRender(Mat4 * Mvp, Texture *Image, int W, int H, float Alpha)
 {
-    cmdRender(0, 0, W, H, Image->u0, Image->v0, Image->u1, Image->v1, Alpha, Image->m_textureId);
+    cmdRender(Mvp, Image, 0, 0, W, H, Alpha);
+}
 
-    __queueIndex = __queue_index_map[Image->m_textureId];
+void GL::cmdRender(Mat4 * Mvp, Texture * Image, int X, int Y, int W, int H, float Alpha)
+{
+    cmdRender(X, Y, X + W, Y + H, Image->u0, Image->v0, Image->u1, Image->v1, Alpha, Image->textureId);
+
+    __queueIndex = __queue_index_map[Image->textureId];
     if (__queueIndex > 0)
     {
-        __vertexBuffer = __vertex_buffer_map[Image->m_textureId];
-        __texcoordBuffer = __texcoord_buffer_map[Image->m_textureId];
-        __alphaBuffer = __alpha_buffer_map[Image->m_textureId];
+        __vertexBuffer = __vertex_buffer_map[Image->textureId];
+        __texcoordBuffer = __texcoord_buffer_map[Image->textureId];
+        __alphaBuffer = __alpha_buffer_map[Image->textureId];
             
         glUseProgram(__progLoc);
             
@@ -500,7 +505,7 @@ void GL::cmdRender(Mat4 * Mvp, Texture *Image, int W, int H, float Alpha)
         glUniformMatrix4fv(__matLoc, 1, GL_FALSE, Mvp->m);
             
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, Image->m_textureId);
+        glBindTexture(GL_TEXTURE_2D, Image->textureId);
         glUniform1i(__sampLoc, 0);
         glDrawElements(GL_TRIANGLES, __queueIndex * 6, GL_UNSIGNED_SHORT, __orderBuffer);
             
@@ -508,7 +513,7 @@ void GL::cmdRender(Mat4 * Mvp, Texture *Image, int W, int H, float Alpha)
         glDisableVertexAttribArray(__texLoc);
         glDisableVertexAttribArray(__alpLoc);
     }
-    __queue_index_map[Image->m_textureId] = 0;
+    __queue_index_map[Image->textureId] = 0;
     __queueIndex = 0;
 }
 

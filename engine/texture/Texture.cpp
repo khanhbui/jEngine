@@ -21,7 +21,7 @@ u0(0.0f),
 v0(0.0f),
 u1(0.0f),
 v1(0.0f),
-m_textureId(0)
+textureId(0)
 {
 }
 
@@ -33,7 +33,7 @@ u0(U0),
 v0(V0),
 u1(U1),
 v1(V1),
-m_textureId(TextureId)
+textureId(TextureId)
 {
     fileName = new char[strlen(FileName)];
     strcpy(fileName, FileName);

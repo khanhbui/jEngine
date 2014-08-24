@@ -73,6 +73,8 @@ public:
     float getScaleY() const;
 
     virtual void setAnchor(float AnchorX, float AnchorY);
+
+    Node * getParent() const;
 };
 
 NAMESPACE_END

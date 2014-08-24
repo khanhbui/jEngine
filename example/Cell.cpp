@@ -11,54 +11,20 @@
 Cell::Cell(int GridX, int GridY, int Color) : Sprite(),
 gridX(GridX),
 gridY(GridY),
-color(-1)
+color(-1),
+__isBomb(0)
 {
     setColor(Color);
 
-    setPosition(gridX * 32, gridY * 32);
+    setPosition(gridX * SIZE, gridY * SIZE);
 
-    __begin = new Sprite();
-    __begin->autorelease();
-    __begin->load("begin", 32, 32, 0, 0);
-    addChild(__begin);
-
-    __end = new Sprite();
-    __end->autorelease();
-    __end->load("end", 32, 32, 0, 0);
-    addChild(__end);
+    __bomb = new Sprite();
+    __bomb->load("bomb", SIZE, SIZE, 0, 0);
 }
 
 Cell::~Cell()
 {
-}
-
-void Cell::setState(int State)
-{
-    state = State;
-
-    switch (state)
-    {
-        case 0:
-        {
-            __begin->visible = true;
-            __end->visible = false;
-            break;
-        }
-
-        case 1:
-        {
-            __begin->visible = false;
-            __end->visible = true;
-            break;
-        }
-
-        default:
-        {
-            __begin->visible = false;
-            __end->visible = false;
-            break;
-        }
-    }
+    RELEASE(__bomb);
 }
 
 void Cell::setColor(int Color)
@@ -72,22 +38,48 @@ void Cell::setColor(int Color)
     switch (color)
     {
         case 0:
-            load("yellow", 32, 32, 0, 0);
+            load("yellow", SIZE, SIZE, 0, 0);
         break;
 
         case 1:
-            load("red", 32, 32, 0, 0);
+            load("red", SIZE, SIZE, 0, 0);
         break;
 
         case 2:
-            load("blue", 32, 32, 0, 0);
+            load("blue", SIZE, SIZE, 0, 0);
         break;
 
         case 3:
-            load("dark", 32, 32, 0, 0);
+            load("dark", SIZE, SIZE, 0, 0);
         break;
 
         default:
         break;
     }
+}
+
+void Cell::setIsBomb(int IsBomb)
+{
+    __isBomb = IsBomb;
+
+    if (__isBomb > 0 && !__bomb->getParent())
+    {
+        addChild(__bomb);
+    }
+    else if (__isBomb <= 0 && __bomb->getParent())
+    {
+        removeChild(__bomb);
+    }
+
+    __bomb->alpha = (float)__isBomb / (float)MAX_BOMBS * 2.0f;
+}
+
+int Cell::getIsBomb() const
+{
+    return __isBomb;
+}
+
+void Cell::countDownBomb()
+{
+    setIsBomb(__isBomb - 1);
 }

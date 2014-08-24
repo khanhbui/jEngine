@@ -9,10 +9,12 @@
 #include "MainScene.h"
 #include "Message.h"
 #include "Cell.h"
+#include "GameOver.h"
+#include "Font.h"
 #include "MathUtil.h"
 
 #include <vector>
-#include <cstdlib>
+#include <cmath>
 
 NAMESPACE_USING;
 
@@ -20,14 +22,14 @@ MainScene::MainScene() : Scene(), ObserverInterface()
 {
     Sprite * bg = new Sprite();
     bg->autorelease();
-    bg->load("gray", SCREEN_WIDTH << 1, SCREEN_HEIGHT << 1, 0, 0);
-    bg->setPosition(-SCREEN_WIDTH >> 1, -SCREEN_HEIGHT >> 1);
+    bg->load("gray", SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0);
+    bg->setPosition(0, 0);
     addChild(bg);
 
     Sprite * container = new Sprite();
     container->autorelease();
-    container->load("white", MAX_W * 32, MAX_H * 32, 0, 0);
-    container->setPosition((SCREEN_WIDTH - container->w) >> 1, (SCREEN_HEIGHT - container->h) >> 1);
+    container->load("white", MAX_W * Cell::SIZE, MAX_H * Cell::SIZE, 0, 0);
+    container->setPosition((SCREEN_WIDTH - container->w) >> 1, (SCREEN_HEIGHT - container->h + Cell::SIZE) >> 1);
     addChild(container);
 
     __grid = new Cell**[MAX_W];
@@ -47,23 +49,20 @@ MainScene::MainScene() : Scene(), ObserverInterface()
 
     Node * colorContainer = new Node();
     colorContainer->autorelease();
-    colorContainer->setPosition((SCREEN_WIDTH - 3 * 32 - 2) >> 1, ((SCREEN_HEIGHT - MAX_H * 32) >> 1) - 35);
+    colorContainer->setPosition(container->getX(), container->getY() - Cell::SIZE - 5);
     addChild(colorContainer);
 
     __color0 = new Cell(0, 0, 0);
     __color0->autorelease();
-    __color0->setState(0);
     colorContainer->addChild(__color0);
 
     __color1 = new Cell(1, 0, 0);
     __color1->autorelease();
-    __color1->setState(2);
     __color1->setPosition(__color1->getX() + 1, __color1->getY());
     colorContainer->addChild(__color1);
 
     __color2 = new Cell(2, 0, 0);
     __color2->autorelease();
-    __color2->setState(2);
     __color2->setPosition(__color2->getX() + 2, __color2->getY());
     colorContainer->addChild(__color2);
 
@@ -71,7 +70,28 @@ MainScene::MainScene() : Scene(), ObserverInterface()
     arrow->autorelease();
     arrow->load("arrow", 0, 0, 0, 0);
     arrow->setPosition((__color0->w - arrow->w) >> 1, -arrow->h);
-    colorContainer->addChild(arrow);
+    __color0->addChild(arrow);
+
+    __font = new Font();
+    __font->autorelease();
+    __font->load("font", 1, Font::ALIGN_TOP | Font::ALIGN_RIGHT);
+    __font->setPosition(container->getX() + container->w, colorContainer->getY());
+    addChild(__font);
+
+    __gameOver = new GameOver();
+    __gameOver->autorelease();
+    __gameOver->setPosition((SCREEN_WIDTH - __gameOver->w) >> 1, (SCREEN_HEIGHT - (__gameOver->h << 2)) >> 1);
+    addChild(__gameOver);
+
+    __begin = new Sprite();
+    __begin->autorelease();
+    __begin->load("begin", Cell::SIZE, Cell::SIZE, 0, 0);
+    container->addChild(__begin);
+    
+    __end = new Sprite();
+    __end->autorelease();
+    __end->load("end", Cell::SIZE, Cell::SIZE, 0, 0);
+    container->addChild(__end);
 
     __reset();
 }
@@ -96,14 +116,21 @@ void MainScene::__reset()
 
     __current = __grid[MAX_W >> 1][MAX_H >> 1];
     __current->visible = true;
-    __current->setState(0);
-    __current->setColor(MathUtil::Instance()->randomIn(0, 4));
+    __current->setColor(MathUtil::Instance()->randomIn(0, Cell::MAX_COLORS));
 
-    __color0->setColor(MathUtil::Instance()->randomIn(0, 4));
-    __color1->setColor(MathUtil::Instance()->randomIn(0, 4));
-    __color2->setColor(MathUtil::Instance()->randomIn(0, 4));
+    __begin->setPosition(__current->getX(), __current->getY());
+    __end->visible = false;
+
+    __color0->setColor(MathUtil::Instance()->randomIn(0, Cell::MAX_COLORS));
+    __color1->setColor(MathUtil::Instance()->randomIn(0, Cell::MAX_COLORS));
+    __color2->setColor(MathUtil::Instance()->randomIn(0, Cell::MAX_COLORS));
 
     __isOver = false;
+    
+    __score = 0;
+    __font->setText(__score);
+
+    __gameOver->visible = false;
 }
 
 void MainScene::__move(int dir)
@@ -145,18 +172,35 @@ void MainScene::__move(int dir)
 
     if (next && !next->visible)
     {
-        __current->setState(2);
-
         __current = next;
-        __current->setState(0);
         __current->setColor(__color0->color);
+        __current->setIsBomb(__color0->getIsBomb());
         __current->visible = true;
+
+        __begin->setPosition(__current->getX(), __current->getY());
 
         __checkScore();
 
+        for (int i = 0; i < MAX_W; i++)
+        {
+            for (int j = 0; j < MAX_H; j++)
+            {
+                Cell * cell = __grid[i][j];
+                if (cell->visible && cell->getIsBomb() > 0)
+                {
+                    cell->countDownBomb();
+                }
+            }
+        }
+
         __color0->setColor(__color1->color);
+        __color0->setIsBomb(__color1->getIsBomb());
+
         __color1->setColor(__color2->color);
-        __color2->setColor(MathUtil::Instance()->randomIn(0, 4));
+        __color1->setIsBomb(__color2->getIsBomb());
+
+        __color2->setColor(MathUtil::Instance()->randomIn(0, Cell::MAX_COLORS));
+        __color2->setIsBomb(MathUtil::Instance()->randf() <= 0.1f ? Cell::MAX_BOMBS : 0);
     }
 }
 
@@ -204,11 +248,40 @@ void MainScene::__checkScore()
 
     if (queue.size() >= 3)
     {
+        bool hasBomb = false;
+        for (std::vector<Cell *>::iterator it = queue.begin(); it != queue.end(); it++)
+        {
+            if ((*it)->getIsBomb())
+            {
+                hasBomb = true;
+                break;
+            }
+        }
+        if (hasBomb)
+        {
+            queue.clear();
+            for (int i = 0; i < MAX_W; i++)
+            {
+                for (int j = 0; j < MAX_H; j++)
+                {
+                    Cell * cell = __grid[i][j];
+                    if (cell->visible && cell->color == __current->color)
+                    {
+                        queue.push_back(cell);
+                    }
+                }
+            }
+        }
+
         for (std::vector<Cell *>::iterator it = queue.begin(); it != queue.end(); it++)
         {
             (*it)->visible = false;
         }
         __current->visible = true;
+        __current->setIsBomb(false);
+
+        __score += queue.size() + 3 * (queue.size() - 3);
+        __font->setText(__score);
     }
     else
     {
@@ -239,7 +312,12 @@ void MainScene::__checkOver()
 
     if (__isOver)
     {
-        __current->setState(1);
+        __current->setIsBomb(0);
+
+        __end->visible = true;
+        __end->setPosition(__current->getX(), __current->getY());
+
+        __gameOver->visible = true;
     }
 }
 
@@ -259,12 +337,12 @@ void MainScene::touchReleased(int PrevX, int PrevY, int X, int Y)
     int dx = X - __pressedX;
     int dy = Y - __pressedY;
 
-    if (abs(dx) < 5 && abs(dy) < 5)
+    if (std::abs(dx) < 5 && std::abs(dy) < 5)
     {
         return;
     }
 
-    if (abs(dx) > abs(dy))
+    if (std::abs(dx) > std::abs(dy))
     {
         if (dx > 0)
         {

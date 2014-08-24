@@ -179,6 +179,11 @@ void Node::setAnchor(float AnchorX, float AnchorY)
     _isDirty = true;
 }
 
+Node * Node::getParent() const
+{
+    return _parent;
+}
+
 
 
 void Node::_update(float Elapsed)

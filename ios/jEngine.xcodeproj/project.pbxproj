@@ -82,6 +82,8 @@
 		ED4F7068198962440060BB66 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F7066198962440060BB66 /* Texture.cpp */; };
 		ED4F706B198965E10060BB66 /* GL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F7069198965E10060BB66 /* GL.cpp */; };
 		ED4F7098199A88190060BB66 /* Cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F7096199A88190060BB66 /* Cell.cpp */; };
+		ED77E5E119A7DD85003A9BC8 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED77E5DF19A7DD85003A9BC8 /* Font.cpp */; };
+		ED77E5E419A9DD39003A9BC8 /* GameOver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED77E5E219A9DD39003A9BC8 /* GameOver.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -263,6 +265,10 @@
 		ED4F706A198965E10060BB66 /* GL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GL.h; sourceTree = "<group>"; };
 		ED4F7096199A88190060BB66 /* Cell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cell.cpp; sourceTree = "<group>"; };
 		ED4F7097199A88190060BB66 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
+		ED77E5DF19A7DD85003A9BC8 /* Font.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
+		ED77E5E019A7DD85003A9BC8 /* Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Font.h; sourceTree = "<group>"; };
+		ED77E5E219A9DD39003A9BC8 /* GameOver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOver.cpp; sourceTree = "<group>"; };
+		ED77E5E319A9DD39003A9BC8 /* GameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOver.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -500,6 +506,8 @@
 				5BC04968198A5BBD00423EAD /* MainScene.h */,
 				ED4F7096199A88190060BB66 /* Cell.cpp */,
 				ED4F7097199A88190060BB66 /* Cell.h */,
+				ED77E5E219A9DD39003A9BC8 /* GameOver.cpp */,
+				ED77E5E319A9DD39003A9BC8 /* GameOver.h */,
 			);
 			name = example;
 			path = ../example;
@@ -644,6 +652,8 @@
 				ED4F7036198957840060BB66 /* Sprite.h */,
 				5BBFFDF3198F86000013EC78 /* BatchNode.cpp */,
 				5BBFFDF4198F86000013EC78 /* BatchNode.h */,
+				ED77E5DF19A7DD85003A9BC8 /* Font.cpp */,
+				ED77E5E019A7DD85003A9BC8 /* Font.h */,
 			);
 			path = 2d;
 			sourceTree = "<group>";
@@ -829,6 +839,7 @@
 				5BC04932198A168600423EAD /* OALAudioTracks.m in Sources */,
 				5BC0493C198A168600423EAD /* ALSource.m in Sources */,
 				5BC0493F198A168600423EAD /* OALAudioSession.m in Sources */,
+				ED77E5E419A9DD39003A9BC8 /* GameOver.cpp in Sources */,
 				5BC04969198A5BBD00423EAD /* MainScene.cpp in Sources */,
 				5BC04940198A168600423EAD /* OALSuspendHandler.m in Sources */,
 				ED4F705E198957840060BB66 /* Engine.cpp in Sources */,
@@ -868,6 +879,7 @@
 				ED4F7098199A88190060BB66 /* Cell.cpp in Sources */,
 				5BC04942198A168600423EAD /* mach_timing.c in Sources */,
 				5BC04936198A168600423EAD /* ALCaptureDevice.m in Sources */,
+				ED77E5E119A7DD85003A9BC8 /* Font.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

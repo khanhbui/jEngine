@@ -102,6 +102,7 @@ public:
 
     void cmdRender(int dest_x0, int dest_y0, int dest_x1, int dest_y1, float tex_u0, float tex_v0, float tex_u1, float tex_v1, float alpha, unsigned int texture = 0);
     void cmdRender(Mat4 * Mvp, Texture * Image, int W, int H, float Alpha);
+    void cmdRender(Mat4 * Mvp, Texture * Image, int X, int Y, int W, int H, float Alpha);
 
     Mat4 * mvp();
 };

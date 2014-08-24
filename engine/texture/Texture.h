@@ -32,7 +32,7 @@ public:
 
     char * fileName;
 
-    unsigned int m_textureId;
+    unsigned int textureId;
 
     float u0;
     float v0;
