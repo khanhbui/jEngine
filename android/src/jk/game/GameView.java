@@ -335,18 +335,13 @@ class GameView extends GLSurfaceView {
 
 		public void onResume() {
 			Log.i(TAG, "GameView.Renderer.onResume: " + isResume);
-			if (!isResume){
-//				SharedPreferences prefs = mContext.getSharedPreferences("SuperBallJuggling", Context.MODE_PRIVATE);
-//				int highScore = (int)prefs.getInt("score", 0);
-//				dot_JNILib.setHighScore(highScore);
+			if (!isResume) {
 //				isResume = true;
-//				dot_TextureAtlas a = new dot_TextureAtlas(mContext, R.raw.atlas);
+//				j_TextureAtlas a = new j_TextureAtlas(mContext, R.raw.atlas);
 //				String atlas = a.getAtlas(R.raw.atlas_text);
-//				dot_JNILib.setAtlas(a.mTextureID, atlas, atlas.length());
-			} else {
-				//need to reload texture after resume
-//				dot_TextureAtlas a = new dot_TextureAtlas(mContext, R.raw.atlas);
-//				dot_JNILib.resume(a.mTextureID);
+//				j_JNILib.setAtlas(a.mTextureID, atlas, atlas.length());
+			}
+			else {
 				j_JNILib.resume(-1, -1);
 			}
 		}

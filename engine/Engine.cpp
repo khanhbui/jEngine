@@ -273,3 +273,16 @@ void Engine::addTextureAtlas(unsigned int TextureId, const char * Description, i
         char_i++;
     }
 };
+
+void Engine::resetTexture(unsigned int TextureId, unsigned int PrevTextureId)
+{
+    int i = 0;
+    while (_images[i] && i < MAX_IMAGES)
+    {
+        if (_images[i]->textureId == PrevTextureId)
+        {
+            _images[i]->textureId = TextureId;
+        }
+        i++;
+    }
+}

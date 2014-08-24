@@ -108,7 +108,7 @@ void onResume(int aTextureID, int oldTextureID)
 	//Reinitialize OpenGL ES 2 window on resume
 	if (aTextureID > -1)
 	{
-//		j::Engine::Instance()->ResetTexture(aTextureID, oldTextureID);
+		j::Engine::Instance()->resetTexture(aTextureID, oldTextureID);
 	}
 
 	j::Engine::Instance()->onResume();

@@ -162,7 +162,7 @@ public class GameActivity extends Activity {
 	public void onBackPressed() {
 		Log.d(TAG, "jk.game.GameActivity.onBackPressed");
 
-		super.onBackPressed();
+		showBackpressConfirm();
 	}
 	
 	@Override
@@ -268,7 +268,7 @@ public class GameActivity extends Activity {
 			public void run() {
 				Log.d(TAG, "Show backpressed confirm: paused game");
 				j_JNILib.pause();
-				new AlertDialog.Builder(GameActivity.this).setTitle("Quit Game").setMessage("Quit?").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+				new AlertDialog.Builder(GameActivity.this).setTitle("Quit Game").setMessage("Are you sure?").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						j_JNILib.exit();
 						GameApplication.killApp(true);
