@@ -29,3 +29,19 @@ jni-build:
 jni-clean:
 	cd android/jni && ndk-build clean
 
+keystore:
+	keytool -genkey -v -keyalg RSA -keystore android/builds/key.keystore -alias swipeblocks -validity 10000
+
+sign:
+	jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore android/builds/key.keystore android/builds/release-unsigned.apk swipeblocks
+
+verify:
+	jarsigner -verify -verbose -certs android/builds/release-unsigned.apk
+
+zalign:
+	zipalign -f -v 4 android/builds/release-unsigned.apk android/builds/swipeblocks.apk
+
+release:
+	make sign
+	make verify
+	make zalign

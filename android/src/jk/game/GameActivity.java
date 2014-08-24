@@ -18,7 +18,7 @@ package jk.game;
 
 import jk.GameApplication;
 import jk.j_JNILib;
-import jk.jEngine.R;
+import jk.jEngine.swipeblocks.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -54,7 +54,7 @@ public class GameActivity extends Activity {
 
 	public static final String RSM_NAME = "jEngine";
 
-	static final String TAG = "DOTENGINE";
+	static final String TAG = "jENGINE";
 	GameView mView;
 
 	public SoundManager mSoundManager;

@@ -1,7 +1,7 @@
 package jk.game;
 
 import jk.GameApplication;
-import jk.jEngine.R;
+import jk.jEngine.swipeblocks.R;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;

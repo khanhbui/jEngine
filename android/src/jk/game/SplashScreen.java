@@ -1,6 +1,6 @@
 package jk.game;
 
-import jk.jEngine.R;
+import jk.jEngine.swipeblocks.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

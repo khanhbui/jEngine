@@ -40,7 +40,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import jk.j_JNILib;
 import jk.j_TextureAtlas;
-import jk.jEngine.R;
+import jk.jEngine.swipeblocks.R;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -66,7 +66,7 @@ import android.view.MotionEvent;
  * depths). Failure to do so would result in an EGL_BAD_MATCH error.
  */
 class GameView extends GLSurfaceView {
-	private static String TAG = "DOTENGINE";
+	private static String TAG = "jENGINE";
 	private static final boolean DEBUG = false;
 	Context mContext;
 	GameActivity mGameActivity;

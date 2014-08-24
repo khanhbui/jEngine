@@ -43,7 +43,7 @@ bool hasPermission = true;
 int width, height;
 int mHightScore;
 
-static const char * APP_PACKAGE_NAME = "jk.jEngine";
+static const char * APP_PACKAGE_NAME = "jk.jEngine.swipeblocks";
 
 static int now_ms(void)
 {
