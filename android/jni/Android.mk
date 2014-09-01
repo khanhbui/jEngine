@@ -23,6 +23,7 @@ FILE_LIST_ENGINE := $(wildcard $(LOCAL_PATH)/../../engine/*.cpp) \
 				   $(wildcard $(LOCAL_PATH)/../../engine/2d/*.cpp) \
 				   $(wildcard $(LOCAL_PATH)/../../engine/action/*.cpp) \
 				   $(wildcard $(LOCAL_PATH)/../../engine/core/*.cpp) \
+				   $(wildcard $(LOCAL_PATH)/../../engine/component/*.cpp) \
 				   $(wildcard $(LOCAL_PATH)/../../engine/event/*.cpp) \
 				   $(wildcard $(LOCAL_PATH)/../../engine/math/*.cpp) \
 				   $(wildcard $(LOCAL_PATH)/../../engine/platform/*.cpp) \
@@ -38,6 +39,7 @@ LOCAL_SRC_FILES := $(FILE_LIST_ENGINE) \
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../engine/ \
 					$(LOCAL_PATH)/../../engine/2d/ \
 					$(LOCAL_PATH)/../../engine/action/ \
+					$(LOCAL_PATH)/../../engine/component/ \
 					$(LOCAL_PATH)/../../engine/core/ \
 					$(LOCAL_PATH)/../../engine/event/ \
 					$(LOCAL_PATH)/../../engine/math/ \

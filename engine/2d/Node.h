@@ -59,6 +59,7 @@ public:
 
     virtual void addChild(Node * Child);
     virtual void removeChild(Node * Child);
+    virtual void removeChildren();
 
     virtual void setPosition(float X, float Y);
     float getX() const;

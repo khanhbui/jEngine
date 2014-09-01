@@ -10,7 +10,7 @@
 
 NAMESPACE_USING
 
-Message::Message(char * Cmd, Ref * From, void * Data) : Ref("Message"),
+Message::Message(int Cmd, Ref * From, void * Data) : Ref("Message"),
 cmd(Cmd),
 from(From),
 data(Data)
@@ -20,7 +20,6 @@ data(Data)
 
 Message::~Message()
 {
-    cmd = NULL;
     data = NULL;
 
     RELEASE(from);

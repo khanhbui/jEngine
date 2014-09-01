@@ -84,6 +84,7 @@
 		ED4F7098199A88190060BB66 /* Cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F7096199A88190060BB66 /* Cell.cpp */; };
 		ED77E5E119A7DD85003A9BC8 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED77E5DF19A7DD85003A9BC8 /* Font.cpp */; };
 		ED77E5E419A9DD39003A9BC8 /* GameOver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED77E5E219A9DD39003A9BC8 /* GameOver.cpp */; };
+		EDB3257619AE6AFB00493687 /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDB3257419AE6AFB00493687 /* Button.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -269,6 +270,8 @@
 		ED77E5E019A7DD85003A9BC8 /* Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Font.h; sourceTree = "<group>"; };
 		ED77E5E219A9DD39003A9BC8 /* GameOver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOver.cpp; sourceTree = "<group>"; };
 		ED77E5E319A9DD39003A9BC8 /* GameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOver.h; sourceTree = "<group>"; };
+		EDB3257419AE6AFB00493687 /* Button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Button.cpp; sourceTree = "<group>"; };
+		EDB3257519AE6AFB00493687 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -625,6 +628,7 @@
 		ED4F702F198957840060BB66 /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				EDB3257319AE6AEE00493687 /* component */,
 				5BD5797E1999D6090012D804 /* event */,
 				5BC6D1721998F38200730FD1 /* action */,
 				ED4F7030198957840060BB66 /* 2d */,
@@ -718,6 +722,15 @@
 				ED4F7067198962440060BB66 /* Texture.h */,
 			);
 			path = texture;
+			sourceTree = "<group>";
+		};
+		EDB3257319AE6AEE00493687 /* component */ = {
+			isa = PBXGroup;
+			children = (
+				EDB3257419AE6AFB00493687 /* Button.cpp */,
+				EDB3257519AE6AFB00493687 /* Button.h */,
+			);
+			path = component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -846,6 +859,7 @@
 				5BC04944198A168600423EAD /* NSMutableDictionary+WeakReferences.m in Sources */,
 				5BC0495A198A479D00423EAD /* MathUtil.cpp in Sources */,
 				5BD579831999D6090012D804 /* Message.cpp in Sources */,
+				EDB3257619AE6AFB00493687 /* Button.cpp in Sources */,
 				5BC6D1841998F47C00730FD1 /* ActionPlayer.cpp in Sources */,
 				ED4F705D198957840060BB66 /* Ref.cpp in Sources */,
 				5BC04938198A168600423EAD /* ALContext.m in Sources */,
@@ -945,7 +959,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -984,7 +998,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1006,6 +1020,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "jEngine/jEngine-Prefix.pch";
 				INFOPLIST_FILE = "jEngine/jEngine-Info.plist";
@@ -1023,6 +1038,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "jEngine/jEngine-Prefix.pch";
 				INFOPLIST_FILE = "jEngine/jEngine-Info.plist";

@@ -16,10 +16,10 @@ NAMESPACE_BEGIN
 class Message : public Ref
 {
 public:
-    Message(char * Cmd, Ref * From, void * Data);
+    Message(int Cmd, Ref * From, void * Data);
     ~Message();
 
-    char * cmd;
+    int cmd;
     Ref * from;
     Ref * origin;
     void * data;

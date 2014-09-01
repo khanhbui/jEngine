@@ -31,7 +31,7 @@ void ObserverInterface::beginObserve(NotifierInterface * Target)
     int index = __checkObserveRecord(Target);
     if (index < 0)
     {
-        int id = Target->__addObserver();
+        int id = Target->__addObserver(this);
         
         ObserverRecord * info = new ObserverRecord(id, Target);
         __observeRecord->push_back(info);

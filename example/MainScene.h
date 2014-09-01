@@ -41,6 +41,10 @@ private:
     Font * __font;
     GameOver * __gameOver;
 
+    Sprite * __tutorial;
+    int __tutorialFlag;
+    float __shakingTutorial;
+
     int __score;
     bool __isOver;
 
@@ -48,12 +52,12 @@ private:
     void __move(int dir);
     void __checkScore();
     void __checkOver();
+    
+    void _update(float Elapsed);
 
 public:
     MainScene();
     virtual ~MainScene();
-
-    void update(float Elapsed);
 
     void touchPressed(int X, int Y);
     void touchReleased(int PrevX, int PrevY, int X, int Y);

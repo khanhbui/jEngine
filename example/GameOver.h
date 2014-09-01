@@ -10,16 +10,19 @@
 #define __jEngine__GameOver__
 
 #include "Node.h"
-#include "Font.h"
+#include "NotifierInterface.h"
+#include "Button.h"
 
 NAMESPACE_USING
 
-class GameOver : public Node
+class GameOver : public Node, public NotifierInterface
 {
 private:
-    Font * __gameOverText;
+    Button * __playBtn;
+    Button * __leaderboardBtn;
 
 protected:
+    void _update(float Elapsed);
 
 public:
     GameOver();

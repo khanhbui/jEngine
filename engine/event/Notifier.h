@@ -37,6 +37,8 @@ private:
 
     static Notifier * __instance;
 
+    int __currentId;
+
     std::queue<Notification *> * __queue;
     std::vector<NotifierInterface *> * __observed;
 
@@ -53,6 +55,9 @@ public:
 
     void sendNotification(int Id, Message * Message);
     void postNotification(int Id, Message * Message);
+
+    int registerNotifier(NotifierInterface * Obj);
+    void unregisterNotifier(int Id);
 };
 
 NAMESPACE_END

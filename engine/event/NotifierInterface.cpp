@@ -16,6 +16,7 @@ NAMESPACE_USING
 NotifierInterface::NotifierInterface()
 {
     __observers = new std::vector<ObserverInterface *>();
+    __notifierID = Notifier::Instance()->registerNotifier(this);
 }
 
 NotifierInterface::~NotifierInterface()
@@ -35,23 +36,24 @@ void NotifierInterface::__notify(Message * Message)
     }
 }
 
-int NotifierInterface::__addObserver()
+int NotifierInterface::__addObserver(ObserverInterface * obj)
 {
-    return -1;
+    __observers->push_back(obj);
+    return __observers->size();
 }
 
 void NotifierInterface::__deleteObserver(int Id)
 {
 }
 
-void NotifierInterface::sendNotification(char * Cmd, void * Data, Ref * From)
+void NotifierInterface::sendNotification(int Cmd, void * Data, Ref * From)
 {
     Message * message = new Message(Cmd, From, Data);
     
     Notifier::Instance()->sendNotification(__notifierID, message);
 }
 
-void NotifierInterface::postNotification(char * Cmd, void * Data, Ref * From)
+void NotifierInterface::postNotification(int Cmd, void * Data, Ref * From)
 {
     Message * message = new Message(Cmd, From, Data);
     

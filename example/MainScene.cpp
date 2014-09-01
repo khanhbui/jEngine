@@ -18,8 +18,11 @@
 
 NAMESPACE_USING;
 
-MainScene::MainScene() : Scene(), ObserverInterface()
+MainScene::MainScene() : Scene(), ObserverInterface(),
+__shakingTutorial(0.0f)
 {
+    active = true;
+
     Sprite * bg = new Sprite();
     bg->autorelease();
     bg->load("gray", SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0);
@@ -80,7 +83,7 @@ MainScene::MainScene() : Scene(), ObserverInterface()
 
     __gameOver = new GameOver();
     __gameOver->autorelease();
-    __gameOver->setPosition((SCREEN_WIDTH - __gameOver->w) >> 1, (SCREEN_HEIGHT - (__gameOver->h << 2)) >> 1);
+    beginObserve(__gameOver);
     addChild(__gameOver);
 
     __begin = new Sprite();
@@ -93,15 +96,20 @@ MainScene::MainScene() : Scene(), ObserverInterface()
     __end->load("end", Cell::SIZE, Cell::SIZE, 0, 0);
     container->addChild(__end);
 
+    __tutorial = new Sprite();
+    __tutorial->autorelease();
+    __tutorial->load("swipe_up", 0, 0, 0, 0);
+    __tutorial->setPosition((SCREEN_WIDTH - __tutorial->w) >> 1, 350);
+    addChild(__tutorial);
+
+    __tutorialFlag = 0x0;
+    
     __reset();
 }
 
 MainScene::~MainScene()
 {
-}
-
-void MainScene::update(float Elapsed)
-{
+    endObserve(__gameOver);
 }
 
 void MainScene::__reset()
@@ -121,9 +129,18 @@ void MainScene::__reset()
     __begin->setPosition(__current->getX(), __current->getY());
     __end->visible = false;
 
-    __color0->setColor(MathUtil::Instance()->randomIn(0, Cell::MAX_COLORS));
-    __color1->setColor(MathUtil::Instance()->randomIn(0, Cell::MAX_COLORS));
-    __color2->setColor(MathUtil::Instance()->randomIn(0, Cell::MAX_COLORS));
+    if (__tutorialFlag)
+    {
+        __color0->setColor(MathUtil::Instance()->randomIn(0, Cell::MAX_COLORS));
+        __color1->setColor(MathUtil::Instance()->randomIn(0, Cell::MAX_COLORS));
+        __color2->setColor(MathUtil::Instance()->randomIn(0, Cell::MAX_COLORS));
+    }
+    else
+    {
+        __color0->setColor((__current->color + 1) % Cell::MAX_COLORS);
+        __color1->setColor(__current->color);
+        __color2->setColor(__current->color);
+    }
 
     __isOver = false;
     
@@ -131,6 +148,7 @@ void MainScene::__reset()
     __font->setText(__score);
 
     __gameOver->visible = false;
+    __gameOver->active = false;
 }
 
 void MainScene::__move(int dir)
@@ -195,12 +213,36 @@ void MainScene::__move(int dir)
 
         __color0->setColor(__color1->color);
         __color0->setIsBomb(__color1->getIsBomb());
-
+        
         __color1->setColor(__color2->color);
         __color1->setIsBomb(__color2->getIsBomb());
 
         __color2->setColor(MathUtil::Instance()->randomIn(0, Cell::MAX_COLORS));
-        __color2->setIsBomb(MathUtil::Instance()->randf() <= 0.1f ? Cell::MAX_BOMBS : 0);
+        __color2->setIsBomb(MathUtil::Instance()->randf() <= 0.05f ? Cell::MAX_BOMBS : 0);
+
+        if (!(__tutorialFlag & 1))
+        {
+            __tutorialFlag |= 1;
+            __tutorial->load("swipe_right", 0, 0, 0, 0);
+
+            __color2->setColor(__color1->color);
+            __color2->setIsBomb(__color1->getIsBomb());
+        }
+        else if (!(__tutorialFlag & (1 << 1)))
+        {
+            __tutorialFlag |= (1 << 1);
+            __tutorial->load("swipe_down", 0, 0, 0, 0);
+        }
+        else if (!(__tutorialFlag & (1 << 2)))
+        {
+            __tutorialFlag |= (1 << 2);
+            __tutorial->load("swipe_left", 0, 0, 0, 0);
+        }
+        else if (!(__tutorialFlag & (1 << 3)))
+        {
+            __tutorialFlag |= (1 << 3);
+            removeChild(__tutorial);
+        }
     }
 }
 
@@ -318,6 +360,25 @@ void MainScene::__checkOver()
         __end->setPosition(__current->getX(), __current->getY());
 
         __gameOver->visible = true;
+        __gameOver->active = true;
+    }
+}
+
+void MainScene::_update(float Elapsed)
+{
+    __gameOver->update(Elapsed);
+
+    if (__shakingTutorial > 0)
+    {
+        __shakingTutorial -= Elapsed;
+        if (__shakingTutorial <= 0)
+        {
+            __tutorial->setPosition((SCREEN_WIDTH - __tutorial->w) >> 1, 350);
+        }
+        else
+        {
+            __tutorial->setPosition(((SCREEN_WIDTH - __tutorial->w) >> 1) + MathUtil::Instance()->randomIn(-2, 2), 350 + MathUtil::Instance()->randomIn(-2, 2));
+        }
     }
 }
 
@@ -325,7 +386,7 @@ void MainScene::touchPressed(int X, int Y)
 {
     if (__isOver)
     {
-        __reset();
+        return;
     }
 
     __pressedX = X;
@@ -342,35 +403,83 @@ void MainScene::touchReleased(int PrevX, int PrevY, int X, int Y)
         return;
     }
 
+    int dir = 0;
     if (std::abs(dx) > std::abs(dy))
     {
         if (dx > 0)
         {
-            __move(0);
+            dir = 0;
         }
         else
         {
-            __move(1);
+            dir = 1;
         }
     }
     else
     {
         if (dy > 0)
         {
-            __move(2);
+            dir = 2;
         }
         else
         {
-            __move(3);
+            dir = 3;
         }
     }
+
+    if (!(__tutorialFlag & 1))
+    {
+        if (dir != 3)
+        {
+            __shakingTutorial = 0.3f;
+            return;
+        }
+    }
+    else if (!(__tutorialFlag & (1 << 1)))
+    {
+        if (dir != 0)
+        {
+            __shakingTutorial = 0.3f;
+            return;
+        }
+    }
+    else if (!(__tutorialFlag & (1 << 2)))
+    {
+        if (dir != 2)
+        {
+            __shakingTutorial = 0.3f;
+            return;
+        }
+    }
+    else if (!(__tutorialFlag & (1 << 3)))
+    {
+        if (dir != 1)
+        {
+            __shakingTutorial = 0.3f;
+            return;
+        }
+    }
+
+    __move(dir);
 }
 
 void MainScene::touchMoved(int SrcX, int SrcY, int X, int Y)
 {
 }
 
-void MainScene::onNotify(Message * aMessage)
+void MainScene::onNotify(Message * Message)
 {
-    LOGD("MainScene::onNotify cmd=%s", aMessage->cmd);
+    LOGD("MainScene::onNotify cmd=%d", Message->cmd);
+    switch (Message->cmd)
+    {
+        case 0:
+            __reset();
+            break;
+
+        case 1:
+            break;
+
+        default:
+            break;
+    }
 }

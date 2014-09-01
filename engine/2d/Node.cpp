@@ -121,6 +121,18 @@ void Node::removeChild(Node * Child)
     ASSERT(false, "Child %s has not been added.", Child->getName());
 }
 
+void Node::removeChildren()
+{
+    for (std::vector<Node *>::iterator it = _childrend->begin(); it != _childrend->end(); it++)
+    {
+        _childrend->erase(it);
+
+        Node * child = *it;
+        child->_parent = NULL;
+        child->release();
+    }
+}
+
 void Node::setPosition(float X, float Y)
 {
     _x = X;

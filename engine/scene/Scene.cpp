@@ -18,10 +18,6 @@ Scene::~Scene()
 {
 }
 
-void Scene::update(float Elapsed)
-{
-}
-
 void Scene::touchPressed(int X, int Y)
 {
 }

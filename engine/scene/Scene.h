@@ -23,8 +23,6 @@ public:
     Scene();
     virtual ~Scene();
 
-    virtual void update(float Elapsed);
-
     virtual void touchPressed(int X, int Y);
     virtual void touchReleased(int PrevX, int PrevY, int X, int Y);
     virtual void touchMoved(int SrcX, int SrcY, int X, int Y);

@@ -28,7 +28,8 @@ Notification::~Notification()
 
 Notifier * Notifier::__instance = NULL;
 
-Notifier::Notifier() : Ref("Notifier")
+Notifier::Notifier() : Ref("Notifier"),
+__currentId(0)
 {
     __queue = new std::queue<Notification * >();
     __observed = new std::vector<NotifierInterface *>();
@@ -85,12 +86,9 @@ void Notifier::update(float Elapsed)
             if ((*it)->__notifierID == notification->id)
             {
                 obj = (*it);
+                obj->__notify(notification->message);
+                break;
             }
-        }
-
-        if (obj)
-        {
-            obj->__notify(notification->message);
         }
     }
 }
@@ -103,12 +101,9 @@ void Notifier::sendNotification(int Id, Message * Message)
         if ((*it)->__notifierID == Id)
         {
             obj = (*it);
+            obj->__notify(Message);
+            break;
         }
-    }
-
-    if (obj)
-    {
-        obj->__notify(Message);
     }
 }
 
@@ -122,4 +117,24 @@ void Notifier::__postNotification(int Id, Message * aMessage, bool IsPrivate)
     Message * clone = aMessage->clone();
 
     __queue->push(new Notification(Id, clone, IsPrivate));
+}
+
+int Notifier::registerNotifier(NotifierInterface * Obj)
+{
+    int id = __currentId++;
+    __observed->push_back(Obj);
+    
+    return id;
+}
+
+void Notifier::unregisterNotifier(int Id)
+{
+    for (std::vector<NotifierInterface *>::iterator it = __observed->begin(); it != __observed->end(); it++)
+    {
+        if ((*it)->__notifierID == Id)
+        {
+            __observed->erase(it);
+            break;
+        }
+    }
 }

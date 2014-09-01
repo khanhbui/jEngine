@@ -23,23 +23,22 @@ class ObserverInterface;
 class NotifierInterface
 {
 private:
-    NotifierInterface();
-
     int __notifierID;
     std::vector<ObserverInterface *> * __observers;
 
     void __notify(Message * Message);
 
-    int __addObserver();
+    int __addObserver(ObserverInterface * obj);
     void __deleteObserver(int Id);
 
 protected:
+    NotifierInterface();
 
 public:
     ~NotifierInterface();
 
-    void sendNotification(char * Cmd, void * Data, Ref * From);
-    void postNotification(char * Cmd, void * Data, Ref * From);
+    void sendNotification(int Cmd, void * Data, Ref * From);
+    void postNotification(int Cmd, void * Data, Ref * From);
 
     friend Notifier;
     friend ObserverInterface;
