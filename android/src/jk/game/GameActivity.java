@@ -16,6 +16,12 @@
 
 package jk.game;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.Games;
+
 import jk.GameApplication;
 import jk.j_JNILib;
 import jk.jEngine.swipeblocks.R;
@@ -36,42 +42,34 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+import basegameutils.GameHelper;
 
-import com.amazon.device.ads.Ad;
-import com.amazon.device.ads.AdError;
-import com.amazon.device.ads.AdLayout;
-import com.amazon.device.ads.AdProperties;
-import com.amazon.device.ads.AdRegistration;
-import com.amazon.device.ads.DefaultAdListener;
-
-public class GameActivity extends Activity {
-	private static boolean ENABLE_AMZN_SERVICE = false;
-
-	public static final String APP_KEY = "02198f7beac647e699c116d30052f0ba";
-	public static final int AD_REFESH_RATE = 30;
-	public static final String LEADERBOARD_ID = "jEngine";
-
+public class GameActivity extends Activity implements GameHelper.GameHelperListener {
+	private static final String LEADER_BOARD_ID = "CgkI98HjhKYdEAIQAQ";
 	public static final String RSM_NAME = "jEngine";
+	protected static final String TAG = "jENGINE";
 
-	static final String TAG = "jENGINE";
 	GameView mView;
 
 	public SoundManager mSoundManager;
+	
 	private int mHighScore = 0;
 	private int mPlayCount = 0;
 	private int mRated = 0;
 
-	// Amazon Ads
 	private FrameLayout adContainer;
-	private AdLayout adView;
-	private long lastTime = 0;
+	public AdView adView;
 
-	TextView mTextInfo;
-	
+	protected GameHelper mHelper;
+	protected int mRequestedClients = GameHelper.CLIENT_GAMES;
+	protected boolean mDebugLog = false;
+
+	boolean first_time = true;
+
 	@Override
 	protected void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
+
 		Log.i(TAG, "GameActivity.onCreate");
 		mSoundManager = new SoundManager(this);
 		mView = new GameView(getApplication(), this);
@@ -81,7 +79,6 @@ public class GameActivity extends Activity {
 		mPlayCount = (int) prefs.getInt("playcount", 0);
 		mRated = (int) prefs.getInt("rated", 0);
 
-		mPlayCount++;
 		saveRSM();
 
 		final RelativeLayout relativeLayout = new RelativeLayout(this);
@@ -91,26 +88,27 @@ public class GameActivity extends Activity {
 
 		relativeLayout.addView(this.mView, surfaceViewLayoutParams);
 
-		if (ENABLE_AMZN_SERVICE) {
-			AdRegistration.enableLogging(true);
-			AdRegistration.enableTesting(true);
-			try {
-				AdRegistration.setAppKey(APP_KEY);
-			} catch (final Exception e) {
-				Log.e(TAG, "Exception thrown: " + e.toString());
-				return;
-			}
+		adView = new AdView(this);
+		adView.setAdUnitId("ca-app-pub-8223213496721349/2059545315");
+		adView.setAdSize(AdSize.SMART_BANNER);
+		adView.setVisibility(View.VISIBLE);
 
-			adContainer = new FrameLayout(this);
-			adView = new AdLayout(this);
-			final LayoutParams layoutParams = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, Gravity.TOP | Gravity.CENTER_HORIZONTAL);
-			adView.setLayoutParams(layoutParams);
-			adView.setListener(new AdListener());
+		adContainer = new FrameLayout(this);
+		final LayoutParams layoutParams = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, Gravity.TOP | Gravity.CENTER_HORIZONTAL);
+		adContainer.addView(adView, layoutParams);
 
-			relativeLayout.addView(adContainer);
-		}
+		relativeLayout.addView(adContainer);
 
 		this.setContentView(relativeLayout, relativeLayoutLayoutParams);
+
+		AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+		adView.loadAd(adRequest);
+
+		if (mHelper == null) {
+			getGameHelper();
+		}
+		mHelper.setMaxAutoSignInAttempts(0);//disable auto first sign in
+		mHelper.setup(this);
 	}
 
 	protected static LayoutParams createSurfaceViewLayoutParams() {
@@ -182,17 +180,34 @@ public class GameActivity extends Activity {
 				Log.d(TAG, String.format("Event %d = %d", i, events[i]));
 				switch (events[i]) {
 				case GameEvent.GAME_EVENT_MAINMENU: {
-					this.DisplayAd();
+					this.displayAd();
+
+					if (first_time)
+	            	{
+		            	this.runOnUiThread(new Runnable() {
+		        			@Override
+		        			public void run() {
+		        				try {
+		        					Thread.sleep(500);
+		        				} catch (Exception e) {}
+		        				if (GameActivity.this.isSignedIn()) {
+		        				} else {
+		        					GameActivity.this.beginUserInitiatedSignIn();
+		        				}
+		        			}
+		        		});
+		            	first_time = false;
+	            	}
 					break;
 				}
 
 				case GameEvent.GAME_EVENT_GAMEPLAY: {
-					this.DismissAd();
+					this.dismissAd();
 					break;
 				}
 
 				case GameEvent.GAME_EVENT_GAMEOVER: {
-					this.DisplayAd();
+					this.displayAd();
 
 					showRating();
 					break;
@@ -290,76 +305,111 @@ public class GameActivity extends Activity {
 		});
 	}
 
-	public void DismissAd() {
-		if (!ENABLE_AMZN_SERVICE) {
-			return;
-		}
+	public void dismissAd() {
+		Log.d(TAG, "jk.game.GameActivity.dismissAd");
 		this.runOnUiThread(new Runnable() {
 			public void run() {
-				adView.setVisibility(View.INVISIBLE);
-				Log.i(TAG, "DismissAd " + lastTime);
+				adView.setVisibility(AdView.GONE);
 			}
 		});
 	}
 
-	public void DisplayAd() {
-		if (!ENABLE_AMZN_SERVICE) {
-			return;
-		}
+	public void displayAd() {
+		Log.d(TAG, "jk.game.GameActivity.displayAd");
 		this.runOnUiThread(new Runnable() {
 			public void run() {
-				long now = System.currentTimeMillis() / 1000L;
-				Log.i(TAG, "DisplayAd " + (now - lastTime) + ", " + j_JNILib.isPlayingState());
-				if (now - lastTime >= AD_REFESH_RATE) {
-					lastTime = now;
-					adContainer.removeView(adView);
-					adView.loadAd();
-				} else {
-					adView.setVisibility(View.VISIBLE);
-				}
+				adView.setVisibility(AdView.VISIBLE);
 			}
 		});
 	}
 
 	public void showLeaderBoard() {
 		Log.d(TAG, "jk.game.GameActivity.showLeaderBoard");
+		this.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (GameActivity.this.isSignedIn()) {
+					GameActivity.this.startActivityForResult(Games.Leaderboards.getLeaderboardIntent(GameActivity.this.getApiClient(), LEADER_BOARD_ID), 1);
+				} else {
+					GameActivity.this.beginUserInitiatedSignIn();
+				}
+			}
+		});
 	}
 
 	public void submitScore(long score) {
 		Log.d(TAG, "jk.game.GameActivity.submitScore");
-	}
-
-	class AdListener extends DefaultAdListener {
-		@Override
-		public void onAdLoaded(final Ad ad, final AdProperties adProperties) {
-			Log.i(TAG, adProperties.getAdType().toString() + " ad loaded successfully.");
-
-			GameActivity.this.lastTime = System.currentTimeMillis() / 1000L;
-			GameActivity.this.adContainer.addView(GameActivity.this.adView);
-
-			if (!j_JNILib.isPlayingState()) {
-				GameActivity.this.adView.setVisibility(View.VISIBLE);
-			}
-		}
-
-		@Override
-		public void onAdFailedToLoad(final Ad ad, final AdError error) {
-			Log.w(TAG, "Ad failed to load. Code: " + error.getCode() + ", Message: " + error.getMessage());
-			GameActivity.this.adView.setVisibility(View.INVISIBLE);
-		}
-
-		@Override
-		public void onAdExpanded(final Ad ad) {
-			Log.i(TAG, "Ad expanded.");
-		}
-
-		@Override
-		public void onAdCollapsed(final Ad ad) {
-			Log.i(TAG, "Ad collapsed.");
+		if (this.isSignedIn()) {
+			Games.Leaderboards.submitScore(getApiClient(), LEADER_BOARD_ID, score);
 		}
 	}
 
 	public int getHighScore() {
 		return mHighScore;
 	};
+
+	public GameHelper getGameHelper() {
+		if (mHelper == null) {
+			mHelper = new GameHelper(this, mRequestedClients);
+			mHelper.enableDebugLog(mDebugLog);
+		}
+		return mHelper;
+	}
+	
+	protected GoogleApiClient getApiClient() {
+		return mHelper.getApiClient();
+	}
+
+	protected boolean isSignedIn() {
+		return mHelper.isSignedIn();
+	}
+
+	protected void beginUserInitiatedSignIn() {
+		mHelper.beginUserInitiatedSignIn();
+	}
+
+	protected void signOut() {
+		mHelper.signOut();
+	}
+
+	protected void showAlert(String message) {
+		mHelper.makeSimpleDialog(message).show();
+	}
+
+	protected void showAlert(String title, String message) {
+		mHelper.makeSimpleDialog(title, message).show();
+	}
+
+	protected void enableDebugLog(boolean enabled) {
+		mDebugLog = true;
+		if (mHelper != null) {
+			mHelper.enableDebugLog(enabled);
+		}
+	}
+
+	protected String getInvitationId() {
+		return mHelper.getInvitationId();
+	}
+
+	protected void reconnectClient() {
+		mHelper.reconnectClient();
+	}
+
+	protected boolean hasSignInError() {
+		return mHelper.hasSignInError();
+	}
+
+	protected GameHelper.SignInFailureReason getSignInError() {
+		return mHelper.getSignInError();
+	}
+
+	@Override
+	public void onSignInFailed() {
+		Log.d(TAG, "jk.game.GameActivity.onSignInFailed");
+	}
+
+	@Override
+	public void onSignInSucceeded() {
+		Log.d(TAG, "jk.game.GameActivity.onSignInSucceeded");
+	}
 }
