@@ -38,7 +38,7 @@ public class j_JNILib {
 	 public static native void touchReleased(int x, int y);
 
 	 public static native int getOutputEventCount();
-	 public static native int[] getOutputEvents();
+	 public static native int getOutputEvent(int index);
 
 	 public static native boolean isPlayingState();
 

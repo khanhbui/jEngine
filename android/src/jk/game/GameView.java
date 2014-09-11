@@ -304,7 +304,7 @@ class GameView extends GLSurfaceView {
 		}
 
 		public void onDrawFrame(GL10 gl) {
-			//j_JNILib.step();
+			j_JNILib.step();
 			mGameActivity.processGameEvent();
 		}
 

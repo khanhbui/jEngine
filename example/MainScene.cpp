@@ -12,6 +12,7 @@
 #include "GameOver.h"
 #include "Font.h"
 #include "MathUtil.h"
+#include "Engine.h"
 
 #include <vector>
 #include <cmath>
@@ -104,6 +105,8 @@ __shakingTutorial(0.0f)
 
     __tutorialFlag = 0x0;
     
+    Engine::Instance()->addOutputEvent(1);
+
     __reset();
 }
 
@@ -149,6 +152,9 @@ void MainScene::__reset()
 
     __gameOver->visible = false;
     __gameOver->active = false;
+
+    Engine::Instance()->addOutputEvent(2);
+    Engine::Instance()->highScore = 0;
 }
 
 void MainScene::__move(int dir)
@@ -361,6 +367,10 @@ void MainScene::__checkOver()
 
         __gameOver->visible = true;
         __gameOver->active = true;
+
+        Engine::Instance()->highScore = __score;
+        Engine::Instance()->addOutputEvent(3);
+        Engine::Instance()->addOutputEvent(5);
     }
 }
 
@@ -477,6 +487,7 @@ void MainScene::onNotify(Message * Message)
             break;
 
         case 1:
+            Engine::Instance()->addOutputEvent(6);
             break;
 
         default:

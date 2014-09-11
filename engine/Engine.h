@@ -36,6 +36,11 @@ public:
     int touchesY[MAX_TOUCHES];
     int numOfTouches;
 
+    int outputEvents[20];
+    int outputEventCount;
+
+    int highScore;
+
     virtual ~Engine();
 
     void setup();
@@ -45,6 +50,8 @@ public:
     void render();
 
     void setTouches(const int * TouchesX, const int * TouchesY, int NumOfTouches);
+
+    void addOutputEvent(int Event);
 
     void touchPressed(int X, int Y);
     void touchReleased(int PrevX, int PrevY, int X, int Y);

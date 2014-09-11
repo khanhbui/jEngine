@@ -50,6 +50,7 @@ void Engine::setup()
     __GL->setupGL();
 
     numOfTouches = 0;
+    outputEventCount = 0;
 }
 
 void Engine::resize(int Width, int Height)
@@ -72,6 +73,7 @@ void Engine::enterFrame()
         tick = FRAME_SECONDS;//adjust the tick time
     }
 
+    outputEventCount = 0;
     
     Notifier::Instance()->update(tick);
 
@@ -181,6 +183,12 @@ void Engine::setTouches(const int * TouchesX, const int * TouchesY, int NumOfTou
         touchesX[i] = TouchesX[i];
         touchesY[i] = TouchesY[i];
     }
+}
+
+void Engine::addOutputEvent(int Event)
+{
+    outputEvents[outputEventCount] = Event;
+    outputEventCount++;
 }
 
 GL * Engine::renderer()

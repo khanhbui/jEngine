@@ -23,25 +23,29 @@ atlas: # create atlas
 scale: # scale images upto 2 times
 	cd tool && ruby scale_images.rb
 
-jni-build:
+jni-build: # build
 	cd android/jni && ndk-build
 
-jni-clean:
+jni-clean: # clean
 	cd android/jni && ndk-build clean
 
-keystore:
+keystore: # create keystore
 	keytool -genkey -v -keyalg RSA -keystore android/builds/key.keystore -alias swipeblocks -validity 10000
 
-sign:
+sign: # sign
 	jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore android/builds/key.keystore android/builds/release-unsigned.apk swipeblocks
 
-verify:
+verify: # verify
 	jarsigner -verify -verbose -certs android/builds/release-unsigned.apk
 
-zalign:
+zalign: # zalign
 	zipalign -f -v 4 android/builds/release-unsigned.apk android/builds/swipeblocks.apk
 
-release:
+release: # release
 	make sign
 	make verify
 	make zalign
+
+connect: # connect adb over wifi
+	adb tcpip 5555
+	adb connect 192.168.0.101:5555

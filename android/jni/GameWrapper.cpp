@@ -41,7 +41,7 @@ int numOfTouches;
 bool isReady = false;
 bool hasPermission = true;
 int width, height;
-int mHightScore;
+int mHightScore = 0;
 
 static const char * APP_PACKAGE_NAME = "jk.jEngine.swipeblocks";
 
@@ -207,7 +207,7 @@ extern "C"
     JNIEXPORT void JNICALL Java_jk_j_1JNILib_touchMoved(JNIEnv * env, jobject obj,  jint src_x, jint src_y, jint x, jint y);
 
     JNIEXPORT jint JNICALL Java_jk_j_1JNILib_getOutputEventCount(JNIEnv * env, jobject obj);
-    JNIEXPORT jintArray JNICALL Java_jk_j_1JNILib_getOutputEvents(JNIEnv * env, jobject obj);
+    JNIEXPORT jint JNICALL Java_jk_j_1JNILib_getOutputEvent(JNIEnv * env, jobject obj, jint index);
 
     JNIEXPORT jint JNICALL Java_jk_j_1JNILib_getHighScore(JNIEnv * env, jobject obj);
     JNIEXPORT void JNICALL Java_jk_j_1JNILib_setHighScore(JNIEnv * env, jobject obj,  jint hs);
@@ -268,32 +268,24 @@ JNIEXPORT void JNICALL Java_jk_j_1JNILib_touchMoved(JNIEnv * env, jobject obj, j
 
 JNIEXPORT jint JNICALL Java_jk_j_1JNILib_getOutputEventCount(JNIEnv * env, jobject obj)
 {
-	return 0;
+	return j::Engine::Instance()->outputEventCount;
 }
 
-JNIEXPORT jintArray JNICALL Java_jk_j_1JNILib_getOutputEvents(JNIEnv * env, jobject obj)
+JNIEXPORT jint JNICALL Java_jk_j_1JNILib_getOutputEvent(JNIEnv * env, jobject obj, jint index)
 {
-	int mCount = 0;
-	jintArray intJavaArray = (env)->NewIntArray(mCount);
+	j::Engine * engine = j::Engine::Instance();
 
-	if (NULL == intJavaArray)
-	{
-		return NULL;
-	}
+	jint ret = engine->outputEvents[index];
 
-	jint elements[mCount];
-
-	(env)->SetIntArrayRegion(intJavaArray, 0, mCount, elements);
-	return intJavaArray;
+	return ret;
 }
 
 JNIEXPORT jint JNICALL Java_jk_j_1JNILib_getHighScore(JNIEnv * env, jobject obj)
 {
-	return mHightScore;
+	return j::Engine::Instance()->highScore;
 }
 
-JNIEXPORT void JNICALL Java_jk_j_1JNILib_setHighScore(JNIEnv * env, jobject obj,  jint hs)
-{
+JNIEXPORT void JNICALL Java_jk_j_1JNILib_setHighScore(JNIEnv * env, jobject obj,  jint hs){
 	mHightScore = hs;
 }
 

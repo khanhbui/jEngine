@@ -169,78 +169,77 @@ public class GameActivity extends Activity implements GameHelper.GameHelperListe
 	}
 
 	public void processGameEvent() {
-
 		int eventCount = j_JNILib.getOutputEventCount();
-		
-		// Log.d(TAG, String.format("processGameEvent: Event Count = %d",
-		// dot_JNILib.getOutputEventCount()));
-		if (eventCount > 0) {
-			int[] events = j_JNILib.getOutputEvents();
-			for (int i = 0; i < eventCount; i++) {
-				Log.d(TAG, String.format("Event %d = %d", i, events[i]));
-				switch (events[i]) {
-				case GameEvent.GAME_EVENT_MAINMENU: {
-					this.displayAd();
+		if (eventCount > 0) 
+		{
+			for (int i = 0; i < eventCount; i++) 
+			{
+				int event = j_JNILib.getOutputEvent(i); 
+				Log.d(TAG, String.format("Event %d = %d", i, event));
 
-					if (first_time)
-	            	{
-		            	this.runOnUiThread(new Runnable() {
-		        			@Override
-		        			public void run() {
-		        				try {
-		        					Thread.sleep(500);
-		        				} catch (Exception e) {}
-		        				if (GameActivity.this.isSignedIn()) {
-		        				} else {
-		        					GameActivity.this.beginUserInitiatedSignIn();
-		        				}
-		        			}
-		        		});
-		            	first_time = false;
-	            	}
-					break;
-				}
-
-				case GameEvent.GAME_EVENT_GAMEPLAY: {
-					this.dismissAd();
-					break;
-				}
-
-				case GameEvent.GAME_EVENT_GAMEOVER: {
-					this.displayAd();
-
-					showRating();
-					break;
-				}
-
-				case GameEvent.GAME_EVENT_SOUND_COIN:
-					mSoundManager.play(SoundManager.SOUND_POINT);
-					break;
-
-				case GameEvent.ENGINE_EVENT_NEW_SCORE: {
-					int score = j_JNILib.getHighScore();
-
-					if (score > mHighScore) {
-						Log.i(TAG, "Save HS score=" + score + " hs=" + mHighScore);
-
-						mHighScore = score;
-						this.submitScore(mHighScore);
-						saveRSM();
+				switch (event) {
+					case GameEvent.GAME_EVENT_MAINMENU: {
+						this.displayAd();
+	
+						if (first_time)
+		            	{
+			            	this.runOnUiThread(new Runnable() {
+			        			@Override
+			        			public void run() {
+			        				try {
+			        					Thread.sleep(500);
+			        				} catch (Exception e) {}
+			        				if (GameActivity.this.isSignedIn()) {
+			        				} else {
+			        					GameActivity.this.beginUserInitiatedSignIn();
+			        				}
+			        			}
+			        		});
+			            	first_time = false;
+		            	}
+						break;
 					}
-					break;
-				}
-
-				case GameEvent.ENGINE_EVENT_LEADERBOARD: {
-					this.showLeaderBoard();
-					break;
-				}
-
-				case GameEvent.ENGINE_EVENT_RATE_BUTTON: {
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					intent.setData(Uri.parse("market://details?id=jk.jEngine"));
-					this.startActivity(intent);
-					break;
-				}
+	
+					case GameEvent.GAME_EVENT_GAMEPLAY: {
+						this.dismissAd();
+						break;
+					}
+	
+					case GameEvent.GAME_EVENT_GAMEOVER: {
+						this.displayAd();
+	
+						showRating();
+						break;
+					}
+	
+					case GameEvent.GAME_EVENT_SOUND_COIN:
+						mSoundManager.play(SoundManager.SOUND_POINT);
+						break;
+	
+					case GameEvent.ENGINE_EVENT_NEW_SCORE: {
+						int score = j_JNILib.getHighScore();
+	
+						if (score > mHighScore) {
+							Log.i(TAG, "Save HS score=" + score + " hs=" + mHighScore);
+	
+							mHighScore = score;
+							this.submitScore(mHighScore);
+							saveRSM();
+						}
+						break;
+					}
+	
+					case GameEvent.ENGINE_EVENT_LEADERBOARD: {
+						this.showLeaderBoard();
+						break;
+					}
+	
+					case GameEvent.ENGINE_EVENT_RATE_BUTTON: {
+						Intent intent = new Intent(Intent.ACTION_VIEW);
+						intent.setData(Uri.parse("market://details?id=jk.jEngine"));
+						this.startActivity(intent);
+						break;
+					}
 				}
 			}
 		}
