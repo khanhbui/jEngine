@@ -19,7 +19,7 @@
 
 NAMESPACE_USING;
 
-MainScene::MainScene() : Scene(), ObserverInterface(),
+MainScene::MainScene(bool Tutorial) : Scene(), ObserverInterface(),
 __shakingTutorial(0.0f)
 {
     active = true;
@@ -101,9 +101,15 @@ __shakingTutorial(0.0f)
     __tutorial->autorelease();
     __tutorial->load("swipe_up", 0, 0, 0, 0);
     __tutorial->setPosition((SCREEN_WIDTH - __tutorial->w) >> 1, 350);
-    addChild(__tutorial);
 
-    __tutorialFlag = 0x0;
+    
+    if (Tutorial) {
+        __tutorialFlag = 0xffff;
+    }
+    else {
+        __tutorialFlag = 0x0;
+        addChild(__tutorial);
+    }
     
     Engine::Instance()->addOutputEvent(1);
 
@@ -248,6 +254,7 @@ void MainScene::__move(int dir)
         {
             __tutorialFlag |= (1 << 3);
             removeChild(__tutorial);
+            Engine::Instance()->addOutputEvent(8);
         }
     }
 }

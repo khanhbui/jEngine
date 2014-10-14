@@ -73,7 +73,7 @@ void Engine::enterFrame()
         tick = FRAME_SECONDS;//adjust the tick time
     }
 
-    outputEventCount = 0;
+    //outputEventCount = 0;
     
     Notifier::Instance()->update(tick);
 

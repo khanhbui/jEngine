@@ -56,6 +56,7 @@ public class GameActivity extends Activity implements GameHelper.GameHelperListe
 	private int mHighScore = 0;
 	private int mPlayCount = 0;
 	private int mRated = 0;
+	private boolean mTutorial = false;
 
 	private FrameLayout adContainer;
 	public AdView adView;
@@ -64,7 +65,7 @@ public class GameActivity extends Activity implements GameHelper.GameHelperListe
 	protected int mRequestedClients = GameHelper.CLIENT_GAMES;
 	protected boolean mDebugLog = true;
 
-	boolean first_time = true;
+	boolean mFirstTime = true;
 
 	@Override
 	protected void onCreate(Bundle icicle) {
@@ -78,6 +79,8 @@ public class GameActivity extends Activity implements GameHelper.GameHelperListe
 		mHighScore = (int) prefs.getInt("score", 0);
 		mPlayCount = (int) prefs.getInt("playcount", 0);
 		mRated = (int) prefs.getInt("rated", 0);
+		mTutorial = (boolean) prefs.getBoolean("tutorial", false);
+		Log.i(TAG, "Retrieve tutorial mTutorial=" + mTutorial);
 
 		saveRSM();
 
@@ -107,7 +110,7 @@ public class GameActivity extends Activity implements GameHelper.GameHelperListe
 		if (mHelper == null) {
 			getGameHelper();
 		}
-		mHelper.setMaxAutoSignInAttempts(0);//disable auto first sign in
+		mHelper.setMaxAutoSignInAttempts(1);//disable auto first sign in
 		mHelper.setup(this);
 	}
 
@@ -187,7 +190,7 @@ public class GameActivity extends Activity implements GameHelper.GameHelperListe
 					case GameEvent.GAME_EVENT_MAINMENU: {
 						this.displayAd();
 	
-						if (first_time)
+						if (mFirstTime)
 		            	{
 			            	this.runOnUiThread(new Runnable() {
 			        			@Override
@@ -201,7 +204,7 @@ public class GameActivity extends Activity implements GameHelper.GameHelperListe
 			        				}
 			        			}
 			        		});
-			            	first_time = false;
+			            	mFirstTime = false;
 		            	}
 						break;
 					}
@@ -230,6 +233,10 @@ public class GameActivity extends Activity implements GameHelper.GameHelperListe
 	
 							mHighScore = score;
 							this.submitScore(mHighScore);
+							
+							if (!mTutorial) {
+								mTutorial = true;
+							}
 							saveRSM();
 						}
 						break;
@@ -242,13 +249,21 @@ public class GameActivity extends Activity implements GameHelper.GameHelperListe
 	
 					case GameEvent.ENGINE_EVENT_RATE_BUTTON: {
 						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setData(Uri.parse("market://details?id=jk.jEngine"));
+						intent.setData(Uri.parse("market://details?id=jk.jEngine.swipeblocks"));
 						this.startActivity(intent);
+						break;
+					}
+					
+					case GameEvent.ENGINE_EVENT_FINISH_TUTORIAL: {
+						mTutorial = true;
+						saveRSM();
+						Log.i(TAG, "Save tutorial mTutorial=" + mTutorial);
 						break;
 					}
 				}
 			}
 		}
+		j_JNILib.clearOutputEventCount();
 	}
 
 	private void saveRSM() {
@@ -258,6 +273,7 @@ public class GameActivity extends Activity implements GameHelper.GameHelperListe
 		editor.putInt("score", mHighScore);
 		editor.putInt("playcount", mPlayCount);
 		editor.putInt("rated", mRated);
+		editor.putBoolean("tutorial", mTutorial);
 		editor.commit();
 	}
 
@@ -351,6 +367,10 @@ public class GameActivity extends Activity implements GameHelper.GameHelperListe
 
 	public int getHighScore() {
 		return mHighScore;
+	};
+	
+	public boolean getTutorial() {
+		return mTutorial;
 	};
 
 	public GameHelper getGameHelper() {

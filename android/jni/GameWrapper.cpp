@@ -42,6 +42,7 @@ bool isReady = false;
 bool hasPermission = true;
 int width, height;
 int mHightScore = 0;
+bool mTutorial = false;
 
 static const char * APP_PACKAGE_NAME = "jk.jEngine.swipeblocks";
 
@@ -97,7 +98,7 @@ void setAtlas(int aTextureID, const char* atlas, int len)
 	j::Engine::Instance()->setup();
 	j::Engine::Instance()->resize(width , height);
 	j::Engine::Instance()->setTextureAtlas(aTextureID, atlas, len);
-	j::Engine::Instance()->setDefaultScene(new MainScene());
+	j::Engine::Instance()->setDefaultScene(new MainScene(mTutorial));
 	j::Engine::Instance()->onResume();
 
 	isReady = true;
@@ -206,11 +207,14 @@ extern "C"
     JNIEXPORT void JNICALL Java_jk_j_1JNILib_touchReleased(JNIEnv * env, jobject obj,  jint x, jint y);
     JNIEXPORT void JNICALL Java_jk_j_1JNILib_touchMoved(JNIEnv * env, jobject obj,  jint src_x, jint src_y, jint x, jint y);
 
+    JNIEXPORT void JNICALL Java_jk_j_1JNILib_clearOutputEventCount(JNIEnv * env, jobject obj);
     JNIEXPORT jint JNICALL Java_jk_j_1JNILib_getOutputEventCount(JNIEnv * env, jobject obj);
     JNIEXPORT jint JNICALL Java_jk_j_1JNILib_getOutputEvent(JNIEnv * env, jobject obj, jint index);
 
     JNIEXPORT jint JNICALL Java_jk_j_1JNILib_getHighScore(JNIEnv * env, jobject obj);
     JNIEXPORT void JNICALL Java_jk_j_1JNILib_setHighScore(JNIEnv * env, jobject obj,  jint hs);
+
+    JNIEXPORT void JNICALL Java_jk_j_1JNILib_setTutorial(JNIEnv * env, jobject obj,  jboolean tutorial);
 
     JNIEXPORT void JNICALL Java_jk_j_1JNILib_resume(JNIEnv * env, jobject obj, jint aTextureID, jint oldTextureID);
     JNIEXPORT void JNICALL Java_jk_j_1JNILib_pause(JNIEnv * env, jobject obj);
@@ -266,6 +270,11 @@ JNIEXPORT void JNICALL Java_jk_j_1JNILib_touchMoved(JNIEnv * env, jobject obj, j
 	onTouchMoved(src_x, src_y, x, y);
 }
 
+JNIEXPORT void JNICALL Java_jk_j_1JNILib_clearOutputEventCount(JNIEnv * env, jobject obj)
+{
+	j::Engine::Instance()->outputEventCount = 0;
+}
+
 JNIEXPORT jint JNICALL Java_jk_j_1JNILib_getOutputEventCount(JNIEnv * env, jobject obj)
 {
 	return j::Engine::Instance()->outputEventCount;
@@ -287,6 +296,10 @@ JNIEXPORT jint JNICALL Java_jk_j_1JNILib_getHighScore(JNIEnv * env, jobject obj)
 
 JNIEXPORT void JNICALL Java_jk_j_1JNILib_setHighScore(JNIEnv * env, jobject obj,  jint hs){
 	mHightScore = hs;
+}
+
+JNIEXPORT void JNICALL Java_jk_j_1JNILib_setTutorial(JNIEnv * env, jobject obj,  jboolean tutorial){
+	mTutorial = tutorial;
 }
 
 JNIEXPORT void JNICALL Java_jk_j_1JNILib_resume(JNIEnv * env, jobject obj, jint aTextureID, jint oldTextureID)

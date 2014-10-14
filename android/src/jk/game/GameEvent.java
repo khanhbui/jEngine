@@ -8,4 +8,5 @@ public class GameEvent {
 	public final static int ENGINE_EVENT_NEW_SCORE = 5;
 	public final static int ENGINE_EVENT_LEADERBOARD = 6;
 	public final static int ENGINE_EVENT_RATE_BUTTON = 7;
+	public final static int ENGINE_EVENT_FINISH_TUTORIAL = 8;
 }

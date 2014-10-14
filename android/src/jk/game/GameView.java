@@ -314,6 +314,7 @@ class GameView extends GLSurfaceView {
 				j_JNILib.init(mGameActivity, width, height);
 
 				j_JNILib.setHighScore(mGameActivity.getHighScore());
+				j_JNILib.setTutorial(mGameActivity.getTutorial());
 				isResume = true;
 				
 				j_TextureAtlas a = new j_TextureAtlas(mContext, R.raw.atlas);

@@ -37,6 +37,7 @@ public class j_JNILib {
 	 public static native void touchPressed(int x, int y);
 	 public static native void touchReleased(int x, int y);
 
+	 public static native void clearOutputEventCount();
 	 public static native int getOutputEventCount();
 	 public static native int getOutputEvent(int index);
 
@@ -44,6 +45,8 @@ public class j_JNILib {
 
 	 public static native int getHighScore();
 	 public static native void setHighScore(int hs);
+	 
+	 public static native void setTutorial(boolean tutorial);
 
 	 public static native void resume(int textureID, int oldTextureID);
 	 public static native void pause();

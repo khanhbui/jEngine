@@ -56,7 +56,7 @@ private:
     void _update(float Elapsed);
 
 public:
-    MainScene();
+    MainScene(bool Tutorial);
     virtual ~MainScene();
 
     void touchPressed(int X, int Y);
