@@ -62,7 +62,7 @@ public class GameActivity extends Activity implements GameHelper.GameHelperListe
 
 	protected GameHelper mHelper;
 	protected int mRequestedClients = GameHelper.CLIENT_GAMES;
-	protected boolean mDebugLog = false;
+	protected boolean mDebugLog = true;
 
 	boolean first_time = true;
 
@@ -128,6 +128,12 @@ public class GameActivity extends Activity implements GameHelper.GameHelperListe
 		super.onStop();
 		Log.d(TAG, "jk.game.GameActivity.onStop");
 		j_JNILib.stop();
+	}
+
+	@Override
+	protected void onActivityResult(int request, int response, Intent data) {
+		super.onActivityResult(request, response, data);
+		mHelper.onActivityResult(request, response, data);
 	}
 
 	@Override
