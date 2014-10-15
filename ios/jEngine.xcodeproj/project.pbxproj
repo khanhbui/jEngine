@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5BBA4B8019EE2CD00056DC54 /* Cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA4B7A19EE2CD00056DC54 /* Cell.cpp */; };
+		5BBA4B8119EE2CD00056DC54 /* GameOver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA4B7C19EE2CD00056DC54 /* GameOver.cpp */; };
+		5BBA4B8219EE2CD00056DC54 /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA4B7E19EE2CD00056DC54 /* MainScene.cpp */; };
 		5BBFFDF5198F86000013EC78 /* BatchNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BBFFDF3198F86000013EC78 /* BatchNode.cpp */; };
 		5BC048DF198A11B900423EAD /* libAdapterIAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC048DC198A11B900423EAD /* libAdapterIAd.a */; };
 		5BC048E0198A11B900423EAD /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC048DD198A11B900423EAD /* libGoogleAdMobAds.a */; };
@@ -47,7 +50,6 @@
 		5BC04954198A408D00423EAD /* SceneDirector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC04952198A408D00423EAD /* SceneDirector.cpp */; };
 		5BC04957198A447F00423EAD /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC04955198A447F00423EAD /* Random.cpp */; };
 		5BC0495A198A479D00423EAD /* MathUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC04958198A479D00423EAD /* MathUtil.cpp */; };
-		5BC04969198A5BBD00423EAD /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC04967198A5BBD00423EAD /* MainScene.cpp */; };
 		5BC6D1811998F39500730FD1 /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC6D17F1998F39500730FD1 /* Action.cpp */; };
 		5BC6D1841998F47C00730FD1 /* ActionPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC6D1821998F47C00730FD1 /* ActionPlayer.cpp */; };
 		5BC6D1871998F5AA00730FD1 /* ActionInterval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC6D1851998F5AA00730FD1 /* ActionInterval.cpp */; };
@@ -81,9 +83,7 @@
 		ED4F706519895E0E0060BB66 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F706319895E0E0060BB66 /* Timer.cpp */; };
 		ED4F7068198962440060BB66 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F7066198962440060BB66 /* Texture.cpp */; };
 		ED4F706B198965E10060BB66 /* GL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F7069198965E10060BB66 /* GL.cpp */; };
-		ED4F7098199A88190060BB66 /* Cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED4F7096199A88190060BB66 /* Cell.cpp */; };
 		ED77E5E119A7DD85003A9BC8 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED77E5DF19A7DD85003A9BC8 /* Font.cpp */; };
-		ED77E5E419A9DD39003A9BC8 /* GameOver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED77E5E219A9DD39003A9BC8 /* GameOver.cpp */; };
 		EDB3257619AE6AFB00493687 /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDB3257419AE6AFB00493687 /* Button.cpp */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +98,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5BBA4B7A19EE2CD00056DC54 /* Cell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cell.cpp; sourceTree = "<group>"; };
+		5BBA4B7B19EE2CD00056DC54 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
+		5BBA4B7C19EE2CD00056DC54 /* GameOver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOver.cpp; sourceTree = "<group>"; };
+		5BBA4B7D19EE2CD00056DC54 /* GameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOver.h; sourceTree = "<group>"; };
+		5BBA4B7E19EE2CD00056DC54 /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainScene.cpp; sourceTree = "<group>"; };
+		5BBA4B7F19EE2CD00056DC54 /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
 		5BBFFDF3198F86000013EC78 /* BatchNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BatchNode.cpp; sourceTree = "<group>"; };
 		5BBFFDF4198F86000013EC78 /* BatchNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatchNode.h; sourceTree = "<group>"; };
 		5BC048BF198A11B900423EAD /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
@@ -206,8 +212,6 @@
 		5BC04956198A447F00423EAD /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Random.h; sourceTree = "<group>"; };
 		5BC04958198A479D00423EAD /* MathUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MathUtil.cpp; sourceTree = "<group>"; };
 		5BC04959198A479D00423EAD /* MathUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathUtil.h; sourceTree = "<group>"; };
-		5BC04967198A5BBD00423EAD /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainScene.cpp; sourceTree = "<group>"; };
-		5BC04968198A5BBD00423EAD /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
 		5BC6D17F1998F39500730FD1 /* Action.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Action.cpp; sourceTree = "<group>"; };
 		5BC6D1801998F39500730FD1 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
 		5BC6D1821998F47C00730FD1 /* ActionPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionPlayer.cpp; sourceTree = "<group>"; };
@@ -264,12 +268,8 @@
 		ED4F7067198962440060BB66 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		ED4F7069198965E10060BB66 /* GL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GL.cpp; sourceTree = "<group>"; };
 		ED4F706A198965E10060BB66 /* GL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GL.h; sourceTree = "<group>"; };
-		ED4F7096199A88190060BB66 /* Cell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cell.cpp; sourceTree = "<group>"; };
-		ED4F7097199A88190060BB66 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		ED77E5DF19A7DD85003A9BC8 /* Font.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
 		ED77E5E019A7DD85003A9BC8 /* Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Font.h; sourceTree = "<group>"; };
-		ED77E5E219A9DD39003A9BC8 /* GameOver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOver.cpp; sourceTree = "<group>"; };
-		ED77E5E319A9DD39003A9BC8 /* GameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOver.h; sourceTree = "<group>"; };
 		EDB3257419AE6AFB00493687 /* Button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Button.cpp; sourceTree = "<group>"; };
 		EDB3257519AE6AFB00493687 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -302,6 +302,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5BBA4B7819EE2CD00056DC54 /* example */ = {
+			isa = PBXGroup;
+			children = (
+				5BBA4B8319EE2CE50056DC54 /* jQuiz */,
+				5BBA4B7919EE2CD00056DC54 /* SwipeBlocks */,
+			);
+			name = example;
+			path = ../example;
+			sourceTree = "<group>";
+		};
+		5BBA4B7919EE2CD00056DC54 /* SwipeBlocks */ = {
+			isa = PBXGroup;
+			children = (
+				5BBA4B7A19EE2CD00056DC54 /* Cell.cpp */,
+				5BBA4B7B19EE2CD00056DC54 /* Cell.h */,
+				5BBA4B7C19EE2CD00056DC54 /* GameOver.cpp */,
+				5BBA4B7D19EE2CD00056DC54 /* GameOver.h */,
+				5BBA4B7E19EE2CD00056DC54 /* MainScene.cpp */,
+				5BBA4B7F19EE2CD00056DC54 /* MainScene.h */,
+			);
+			path = SwipeBlocks;
+			sourceTree = "<group>";
+		};
+		5BBA4B8319EE2CE50056DC54 /* jQuiz */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = jQuiz;
+			sourceTree = "<group>";
+		};
 		5BC048BC198A11B900423EAD /* Admob */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,20 +532,6 @@
 			path = ../gdx;
 			sourceTree = "<group>";
 		};
-		5BC04966198A5BBD00423EAD /* example */ = {
-			isa = PBXGroup;
-			children = (
-				5BC04967198A5BBD00423EAD /* MainScene.cpp */,
-				5BC04968198A5BBD00423EAD /* MainScene.h */,
-				ED4F7096199A88190060BB66 /* Cell.cpp */,
-				ED4F7097199A88190060BB66 /* Cell.h */,
-				ED77E5E219A9DD39003A9BC8 /* GameOver.cpp */,
-				ED77E5E319A9DD39003A9BC8 /* GameOver.h */,
-			);
-			name = example;
-			path = ../example;
-			sourceTree = "<group>";
-		};
 		5BC6D1721998F38200730FD1 /* action */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,7 +563,7 @@
 		ED4F6F9219894A7C0060BB66 = {
 			isa = PBXGroup;
 			children = (
-				5BC04966198A5BBD00423EAD /* example */,
+				5BBA4B7819EE2CD00056DC54 /* example */,
 				ED4F702F198957840060BB66 /* engine */,
 				5BC04948198A224000423EAD /* gdx */,
 				5BC048E2198A168600423EAD /* ObjectAL */,
@@ -850,10 +866,11 @@
 				5BC0493E198A168600423EAD /* OpenALManager.m in Sources */,
 				5BC04931198A168600423EAD /* OALAudioTrackNotifications.m in Sources */,
 				5BC04932198A168600423EAD /* OALAudioTracks.m in Sources */,
+				5BBA4B8219EE2CD00056DC54 /* MainScene.cpp in Sources */,
+				5BBA4B8019EE2CD00056DC54 /* Cell.cpp in Sources */,
 				5BC0493C198A168600423EAD /* ALSource.m in Sources */,
+				5BBA4B8119EE2CD00056DC54 /* GameOver.cpp in Sources */,
 				5BC0493F198A168600423EAD /* OALAudioSession.m in Sources */,
-				ED77E5E419A9DD39003A9BC8 /* GameOver.cpp in Sources */,
-				5BC04969198A5BBD00423EAD /* MainScene.cpp in Sources */,
 				5BC04940198A168600423EAD /* OALSuspendHandler.m in Sources */,
 				ED4F705E198957840060BB66 /* Engine.cpp in Sources */,
 				5BC04944198A168600423EAD /* NSMutableDictionary+WeakReferences.m in Sources */,
@@ -890,7 +907,6 @@
 				5BC04945198A168600423EAD /* OALAudioFile.m in Sources */,
 				5BC04946198A168600423EAD /* OALTools.m in Sources */,
 				5BC04934198A168600423EAD /* OALSimpleAudio.m in Sources */,
-				ED4F7098199A88190060BB66 /* Cell.cpp in Sources */,
 				5BC04942198A168600423EAD /* mach_timing.c in Sources */,
 				5BC04936198A168600423EAD /* ALCaptureDevice.m in Sources */,
 				ED77E5E119A7DD85003A9BC8 /* Font.cpp in Sources */,

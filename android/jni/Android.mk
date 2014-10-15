@@ -31,7 +31,7 @@ FILE_LIST_ENGINE := $(wildcard $(LOCAL_PATH)/../../engine/*.cpp) \
 				   $(wildcard $(LOCAL_PATH)/../../engine/scene/*.cpp) \
 				   $(wildcard $(LOCAL_PATH)/../../engine/texture/*.cpp)
 
-FILE_LIST_GAME := $(wildcard $(LOCAL_PATH)/../../example/*.cpp)
+FILE_LIST_GAME := $(wildcard $(LOCAL_PATH)/../../example/SwipeBlocks/*.cpp)
 LOCAL_SRC_FILES := $(FILE_LIST_ENGINE) \
 					$(FILE_LIST_GAME)\
 					$(wildcard $(LOCAL_PATH)/*.cpp)
@@ -47,7 +47,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../engine/ \
 					$(LOCAL_PATH)/../../engine/renderer/ \
 					$(LOCAL_PATH)/../../engine/scene/ \
 					$(LOCAL_PATH)/../../engine/texture/ \
-					$(LOCAL_PATH)/../../example/
+					$(LOCAL_PATH)/../../example/SwipeBlocks/
 
 LOCAL_CFLAGS :=
 
