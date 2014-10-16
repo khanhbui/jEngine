@@ -42,6 +42,10 @@ Sprite::~Sprite()
 void Sprite::load(const char * ImageName, int Width, int Height, int OffsetX, int OffsetY)
 {
     _images = Engine::Instance()->findImages(ImageName, _frameCount);
+    if (!_images)
+    {
+        LOGW("%s not found!!", ImageName);
+    }
     
     if (Width && Height)
     {

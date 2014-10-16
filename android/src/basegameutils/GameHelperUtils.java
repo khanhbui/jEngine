@@ -30,8 +30,8 @@ class GameHelperUtils {
     };
 
     private final static int[] RES_IDS = {
-    	jk.jEngine.swipeblocks.R.string.gamehelper_unknown_error, jk.jEngine.swipeblocks.R.string.gamehelper_sign_in_failed,
-    	jk.jEngine.swipeblocks.R.string.gamehelper_app_misconfigured, jk.jEngine.swipeblocks.R.string.gamehelper_license_failed
+    	jk.jEngine.jQuiz.R.string.gamehelper_unknown_error, jk.jEngine.jQuiz.R.string.gamehelper_sign_in_failed,
+    	jk.jEngine.jQuiz.R.string.gamehelper_app_misconfigured, jk.jEngine.jQuiz.R.string.gamehelper_license_failed
     };
 
     static String activityResponseCodeToString(int respCode) {

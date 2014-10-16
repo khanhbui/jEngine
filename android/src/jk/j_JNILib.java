@@ -31,6 +31,7 @@ public class j_JNILib {
      * @param height the current view height
      */
      public static native void init(GameActivity context, int width, int height);
+     public static native void startWithMainScene();
      public static native void exit();
      public static native void step();
      public static native void setAtlas(int id, String atlas, int len);

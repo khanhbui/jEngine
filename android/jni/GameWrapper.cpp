@@ -44,7 +44,7 @@ int width, height;
 int mHightScore = 0;
 bool mTutorial = false;
 
-static const char * APP_PACKAGE_NAME = "jk.jEngine.swipeblocks";
+static const char * APP_PACKAGE_NAME = "jk.jEngine.jQuiz";
 
 static int now_ms(void)
 {
@@ -77,6 +77,11 @@ bool setupGraphics(int w, int h)
 
 	width = w;
 	height = h;
+
+	j::Engine::Create();
+	j::Engine::Instance()->setup();
+	j::Engine::Instance()->resize(width , height);
+
 	return true;
 }
 
@@ -88,20 +93,21 @@ void renderFrame()
 	}
 }
 
-void setAtlas(int aTextureID, const char* atlas, int len)
+void startWithMainScene()
 {
-	LOGD("Atlas TextureID=%d",aTextureID);
-	LOGD("Atlas Len=%d",len);
-	LOGD("Atlas=%s",atlas);
-
-	j::Engine::Create();
-	j::Engine::Instance()->setup();
-	j::Engine::Instance()->resize(width , height);
-	j::Engine::Instance()->setTextureAtlas(aTextureID, atlas, len);
-	j::Engine::Instance()->setDefaultScene(new MainScene(mTutorial));
+	j::Engine::Instance()->setDefaultScene(new jQuiz::MainScene(mTutorial));
 	j::Engine::Instance()->onResume();
 
 	isReady = true;
+}
+
+void setAtlas(int aTextureID, const char* atlas, int len)
+{
+	LOGD("Atlas TextureID=%d",aTextureID);
+	LOGD("Atlas Len=%d %d",len, strlen(atlas));
+	LOGD("Atlas=%s",atlas);
+
+	j::Engine::Instance()->setTextureAtlas(aTextureID, atlas, len);
 }
 
 void onResume(int aTextureID, int oldTextureID)
@@ -199,6 +205,7 @@ void onTouchMoved(int src_x, int src_y, int x, int y)
 extern "C"
 {
     JNIEXPORT void JNICALL Java_jk_j_1JNILib_init(JNIEnv * env, jobject obj, jobject activity, jint width, jint height);
+    JNIEXPORT void JNICALL Java_jk_j_1JNILib_startWithMainScene(JNIEnv * env, jobject obj);
     JNIEXPORT void JNICALL Java_jk_j_1JNILib_exit(JNIEnv * env, jobject obj);
     JNIEXPORT void JNICALL Java_jk_j_1JNILib_step(JNIEnv * env, jobject obj);
     JNIEXPORT void JNICALL Java_jk_j_1JNILib_setAtlas(JNIEnv * env, jobject obj, jint aTextureID, jstring atlas, jint len);
@@ -237,6 +244,11 @@ JNIEXPORT void JNICALL Java_jk_j_1JNILib_init(JNIEnv * env, jobject obj, jobject
 		hasPermission = false;
 	}
     setupGraphics(width, height);
+}
+
+JNIEXPORT void JNICALL Java_jk_j_1JNILib_startWithMainScene(JNIEnv * env, jobject obj)
+{
+	startWithMainScene();
 }
 
 JNIEXPORT void JNICALL Java_jk_j_1JNILib_exit(JNIEnv * env, jobject obj)

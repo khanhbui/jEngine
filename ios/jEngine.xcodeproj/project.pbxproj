@@ -10,6 +10,16 @@
 		5BBA4B8019EE2CD00056DC54 /* Cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA4B7A19EE2CD00056DC54 /* Cell.cpp */; };
 		5BBA4B8119EE2CD00056DC54 /* GameOver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA4B7C19EE2CD00056DC54 /* GameOver.cpp */; };
 		5BBA4B8219EE2CD00056DC54 /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA4B7E19EE2CD00056DC54 /* MainScene.cpp */; };
+		5BBA4B8719EE33070056DC54 /* MainScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA4B8519EE33070056DC54 /* MainScene.cpp */; };
+		5BBA4B8A19EE35A80056DC54 /* Cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA4B8819EE35A80056DC54 /* Cell.cpp */; };
+		5BBA4B9319EF6AA80056DC54 /* atlas1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BBA4B8B19EF6AA80056DC54 /* atlas1.png */; };
+		5BBA4B9419EF6AA80056DC54 /* atlas1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5BBA4B8C19EF6AA80056DC54 /* atlas1.txt */; };
+		5BBA4B9519EF6AA80056DC54 /* atlas2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BBA4B8D19EF6AA80056DC54 /* atlas2.png */; };
+		5BBA4B9619EF6AA80056DC54 /* atlas2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5BBA4B8E19EF6AA80056DC54 /* atlas2.txt */; };
+		5BBA4B9719EF6AA80056DC54 /* atlas3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BBA4B8F19EF6AA80056DC54 /* atlas3.png */; };
+		5BBA4B9819EF6AA80056DC54 /* atlas3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5BBA4B9019EF6AA80056DC54 /* atlas3.txt */; };
+		5BBA4B9919EF6AA80056DC54 /* atlas4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BBA4B9119EF6AA80056DC54 /* atlas4.png */; };
+		5BBA4B9A19EF6AA80056DC54 /* atlas4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5BBA4B9219EF6AA80056DC54 /* atlas4.txt */; };
 		5BBFFDF5198F86000013EC78 /* BatchNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BBFFDF3198F86000013EC78 /* BatchNode.cpp */; };
 		5BC048DF198A11B900423EAD /* libAdapterIAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC048DC198A11B900423EAD /* libAdapterIAd.a */; };
 		5BC048E0198A11B900423EAD /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC048DD198A11B900423EAD /* libGoogleAdMobAds.a */; };
@@ -43,8 +53,6 @@
 		5BC04945198A168600423EAD /* OALAudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC04923198A168600423EAD /* OALAudioFile.m */; };
 		5BC04946198A168600423EAD /* OALTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC04926198A168600423EAD /* OALTools.m */; };
 		5BC04947198A168600423EAD /* ObjectAL-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BC04929198A168600423EAD /* ObjectAL-Info.plist */; };
-		5BC0494C198A224000423EAD /* atlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BC04949198A224000423EAD /* atlas.png */; };
-		5BC0494D198A224000423EAD /* atlas.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5BC0494A198A224000423EAD /* atlas.txt */; };
 		5BC0494E198A224000423EAD /* sfx_point.aif in Resources */ = {isa = PBXBuildFile; fileRef = 5BC0494B198A224000423EAD /* sfx_point.aif */; };
 		5BC04951198A3F5F00423EAD /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC0494F198A3F5F00423EAD /* Scene.cpp */; };
 		5BC04954198A408D00423EAD /* SceneDirector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BC04952198A408D00423EAD /* SceneDirector.cpp */; };
@@ -104,6 +112,18 @@
 		5BBA4B7D19EE2CD00056DC54 /* GameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOver.h; sourceTree = "<group>"; };
 		5BBA4B7E19EE2CD00056DC54 /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainScene.cpp; sourceTree = "<group>"; };
 		5BBA4B7F19EE2CD00056DC54 /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
+		5BBA4B8519EE33070056DC54 /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainScene.cpp; sourceTree = "<group>"; };
+		5BBA4B8619EE33070056DC54 /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
+		5BBA4B8819EE35A80056DC54 /* Cell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cell.cpp; sourceTree = "<group>"; };
+		5BBA4B8919EE35A80056DC54 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
+		5BBA4B8B19EF6AA80056DC54 /* atlas1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atlas1.png; sourceTree = "<group>"; };
+		5BBA4B8C19EF6AA80056DC54 /* atlas1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = atlas1.txt; sourceTree = "<group>"; };
+		5BBA4B8D19EF6AA80056DC54 /* atlas2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atlas2.png; sourceTree = "<group>"; };
+		5BBA4B8E19EF6AA80056DC54 /* atlas2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = atlas2.txt; sourceTree = "<group>"; };
+		5BBA4B8F19EF6AA80056DC54 /* atlas3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atlas3.png; sourceTree = "<group>"; };
+		5BBA4B9019EF6AA80056DC54 /* atlas3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = atlas3.txt; sourceTree = "<group>"; };
+		5BBA4B9119EF6AA80056DC54 /* atlas4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atlas4.png; sourceTree = "<group>"; };
+		5BBA4B9219EF6AA80056DC54 /* atlas4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = atlas4.txt; sourceTree = "<group>"; };
 		5BBFFDF3198F86000013EC78 /* BatchNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BatchNode.cpp; sourceTree = "<group>"; };
 		5BBFFDF4198F86000013EC78 /* BatchNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatchNode.h; sourceTree = "<group>"; };
 		5BC048BF198A11B900423EAD /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
@@ -201,8 +221,6 @@
 		5BC04928198A168600423EAD /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		5BC04929198A168600423EAD /* ObjectAL-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ObjectAL-Info.plist"; sourceTree = "<group>"; };
 		5BC0492A198A168600423EAD /* ObjectAL-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ObjectAL-Prefix.pch"; sourceTree = "<group>"; };
-		5BC04949198A224000423EAD /* atlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atlas.png; sourceTree = "<group>"; };
-		5BC0494A198A224000423EAD /* atlas.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = atlas.txt; sourceTree = "<group>"; };
 		5BC0494B198A224000423EAD /* sfx_point.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = sfx_point.aif; sourceTree = "<group>"; };
 		5BC0494F198A3F5F00423EAD /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		5BC04950198A3F5F00423EAD /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
@@ -305,7 +323,7 @@
 		5BBA4B7819EE2CD00056DC54 /* example */ = {
 			isa = PBXGroup;
 			children = (
-				5BBA4B8319EE2CE50056DC54 /* jQuiz */,
+				5BBA4B8419EE33070056DC54 /* jQuiz */,
 				5BBA4B7919EE2CD00056DC54 /* SwipeBlocks */,
 			);
 			name = example;
@@ -325,9 +343,13 @@
 			path = SwipeBlocks;
 			sourceTree = "<group>";
 		};
-		5BBA4B8319EE2CE50056DC54 /* jQuiz */ = {
+		5BBA4B8419EE33070056DC54 /* jQuiz */ = {
 			isa = PBXGroup;
 			children = (
+				5BBA4B8819EE35A80056DC54 /* Cell.cpp */,
+				5BBA4B8919EE35A80056DC54 /* Cell.h */,
+				5BBA4B8519EE33070056DC54 /* MainScene.cpp */,
+				5BBA4B8619EE33070056DC54 /* MainScene.h */,
 			);
 			path = jQuiz;
 			sourceTree = "<group>";
@@ -524,8 +546,14 @@
 		5BC04948198A224000423EAD /* gdx */ = {
 			isa = PBXGroup;
 			children = (
-				5BC04949198A224000423EAD /* atlas.png */,
-				5BC0494A198A224000423EAD /* atlas.txt */,
+				5BBA4B8B19EF6AA80056DC54 /* atlas1.png */,
+				5BBA4B8C19EF6AA80056DC54 /* atlas1.txt */,
+				5BBA4B8D19EF6AA80056DC54 /* atlas2.png */,
+				5BBA4B8E19EF6AA80056DC54 /* atlas2.txt */,
+				5BBA4B8F19EF6AA80056DC54 /* atlas3.png */,
+				5BBA4B9019EF6AA80056DC54 /* atlas3.txt */,
+				5BBA4B9119EF6AA80056DC54 /* atlas4.png */,
+				5BBA4B9219EF6AA80056DC54 /* atlas4.txt */,
 				5BC0494B198A224000423EAD /* sfx_point.aif */,
 			);
 			name = gdx;
@@ -826,17 +854,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BBA4B9519EF6AA80056DC54 /* atlas2.png in Resources */,
 				ED4F6FBB19894A7C0060BB66 /* Shader.fsh in Resources */,
 				5BC0492B198A168600423EAD /* InfoPlist.strings in Resources */,
-				5BC0494D198A224000423EAD /* atlas.txt in Resources */,
+				5BBA4B9719EF6AA80056DC54 /* atlas3.png in Resources */,
 				ED4F6FC219894A7C0060BB66 /* Images.xcassets in Resources */,
+				5BBA4B9319EF6AA80056DC54 /* atlas1.png in Resources */,
+				5BBA4B9919EF6AA80056DC54 /* atlas4.png in Resources */,
 				ED4F6FAD19894A7C0060BB66 /* InfoPlist.strings in Resources */,
+				5BBA4B9A19EF6AA80056DC54 /* atlas4.txt in Resources */,
 				5BC04947198A168600423EAD /* ObjectAL-Info.plist in Resources */,
+				5BBA4B9619EF6AA80056DC54 /* atlas2.txt in Resources */,
 				5BC0494E198A224000423EAD /* sfx_point.aif in Resources */,
 				5BC04933198A168600423EAD /* LICENSE.ObjectAL.txt in Resources */,
 				5BC048E1198A11B900423EAD /* README.txt in Resources */,
-				5BC0494C198A224000423EAD /* atlas.png in Resources */,
 				ED4F6FBD19894A7C0060BB66 /* Shader.vsh in Resources */,
+				5BBA4B9819EF6AA80056DC54 /* atlas3.txt in Resources */,
+				5BBA4B9419EF6AA80056DC54 /* atlas1.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -880,10 +914,12 @@
 				5BC6D1841998F47C00730FD1 /* ActionPlayer.cpp in Sources */,
 				ED4F705D198957840060BB66 /* Ref.cpp in Sources */,
 				5BC04938198A168600423EAD /* ALContext.m in Sources */,
+				5BBA4B8719EE33070056DC54 /* MainScene.cpp in Sources */,
 				5BC0492D198A168600423EAD /* OALActionManager.m in Sources */,
 				5BC0492C198A168600423EAD /* OALAction.m in Sources */,
 				5BD579841999D6090012D804 /* Notifier.cpp in Sources */,
 				ED4F6FC019894A7C0060BB66 /* jViewController.mm in Sources */,
+				5BBA4B8A19EE35A80056DC54 /* Cell.cpp in Sources */,
 				5BC04957198A447F00423EAD /* Random.cpp in Sources */,
 				ED4F706519895E0E0060BB66 /* Timer.cpp in Sources */,
 				5BC0493D198A168600423EAD /* ALWrapper.m in Sources */,

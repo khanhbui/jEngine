@@ -24,7 +24,7 @@ import com.google.android.gms.games.Games;
 
 import jk.GameApplication;
 import jk.j_JNILib;
-import jk.jEngine.swipeblocks.R;
+import jk.jEngine.jQuiz.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;

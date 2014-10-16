@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="jk.jEngine.swipeblocks"
+    package="jk.jEngine.jQuiz"
     android:versionCode="4"
     android:versionName="1.0.3" >
 

@@ -24,14 +24,14 @@ public class j_TextureAtlas
 
 	Context context;
 
-	public j_TextureAtlas(Context context, int ImageResourceId)
+	public j_TextureAtlas(Context context, int ImageResourceId, int Index)
 
 	{
 		this.context = context;
-		bindTexture(ImageResourceId);
+		bindTexture(ImageResourceId, Index);
 	}
 
-	public void bindTexture(int ImageResourceId)
+	public void bindTexture(int ImageResourceId, int Index)
 
 	{
 		InputStream stream = this.context.getResources().openRawResource(
@@ -96,8 +96,10 @@ public class j_TextureAtlas
 			buffer = new byte[is.available()];
 			while (is.read(buffer) != -1);
 	        String text = new String(buffer);
+	        Log.d("jEngine", atlasId + ": " + text.length() + ": " + text);
 	        return text;
 		} catch (IOException e) {
+			Log.e("jEngine", "getAtlas error: " + e.getMessage());
 		}
         return null;
 	}

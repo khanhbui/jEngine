@@ -1,6 +1,6 @@
 package jk;
 
-import jk.jEngine.swipeblocks.R;
+import jk.jEngine.jQuiz.R;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;

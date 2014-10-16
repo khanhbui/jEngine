@@ -105,6 +105,19 @@ static jViewController * instance;
     _eglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     [EAGLContext setCurrentContext:_eglContext];
     
+    numOfTouches = 0;
+
+    j::Engine::Create();
+    j::Engine::Instance()->setup();
+    
+    [self setTextureAtlas];
+
+    j::Engine::Instance()->setDefaultScene(new jQuiz::MainScene(false));
+}
+
+- (void) setTextureAtlas
+{
+    //atlas1
     GLuint texName;
     glGenTextures(1, &texName);
     glBindTexture(GL_TEXTURE_2D, texName);
@@ -112,7 +125,7 @@ static jViewController * instance;
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"atlas" ofType:@"png"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"atlas1" ofType:@"png"];
     NSData *texData = [[NSData alloc] initWithContentsOfFile:path];
     UIImage *image = [[UIImage alloc] initWithData:texData];
     if (image == nil)
@@ -136,11 +149,9 @@ static jViewController * instance;
     [image release];
     [texData release];
     
-    numOfTouches = 0;
-
-    NSString * txtPath = [[NSBundle mainBundle] pathForResource:@"atlas" ofType:@"txt"];
+    NSString * txtPath = [[NSBundle mainBundle] pathForResource:@"atlas1" ofType:@"txt"];
     const char * atlasTxt = [txtPath UTF8String];
-
+    
     char _read_buffer[10240];
     FILE * _atlas_file = fopen(atlasTxt, "r");
     int _atlas_len = 0;
@@ -149,12 +160,139 @@ static jViewController * instance;
         _atlas_len = fread(_read_buffer, 1, 10240, _atlas_file);
     }
     fclose(_atlas_file);
-
-    j::Engine::Create();
-    j::Engine::Instance()->setup();
     j::Engine::Instance()->setTextureAtlas(texName, _read_buffer, _atlas_len);
-
-    j::Engine::Instance()->setDefaultScene(new MainScene());
+    
+    
+    //atlas2
+    glGenTextures(2, &texName);
+    glBindTexture(GL_TEXTURE_2D, texName);
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
+    path = [[NSBundle mainBundle] pathForResource:@"atlas2" ofType:@"png"];
+    texData = [[NSData alloc] initWithContentsOfFile:path];
+    image = [[UIImage alloc] initWithData:texData];
+    if (image == nil)
+        NSLog(@"Do real error checking here");
+    
+    width = CGImageGetWidth(image.CGImage);
+    height = CGImageGetHeight(image.CGImage);
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+    imageData = malloc( height * width * 4 );
+    _pContext = CGBitmapContextCreate( imageData, width, height, 8, 4 * width, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big );
+    CGColorSpaceRelease( colorSpace );
+    CGContextClearRect( _pContext, CGRectMake( 0, 0, width, height ) );
+    CGContextTranslateCTM( _pContext, 0, height - height );
+    CGContextDrawImage( _pContext, CGRectMake( 0, 0, width, height ), image.CGImage );
+    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+    
+    CGContextRelease(_pContext);
+    
+    free(imageData);
+    [image release];
+    [texData release];
+    
+    txtPath = [[NSBundle mainBundle] pathForResource:@"atlas2" ofType:@"txt"];
+    atlasTxt = [txtPath UTF8String];
+    
+    _atlas_file = fopen(atlasTxt, "r");
+    _atlas_len = 0;
+    if (_atlas_file)
+    {
+        _atlas_len = fread(_read_buffer, 1, 10240, _atlas_file);
+    }
+    fclose(_atlas_file);
+    j::Engine::Instance()->setTextureAtlas(texName, _read_buffer, _atlas_len);
+    
+    
+    //atlas3
+    glGenTextures(3, &texName);
+    glBindTexture(GL_TEXTURE_2D, texName);
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
+    path = [[NSBundle mainBundle] pathForResource:@"atlas3" ofType:@"png"];
+    texData = [[NSData alloc] initWithContentsOfFile:path];
+    image = [[UIImage alloc] initWithData:texData];
+    if (image == nil)
+        NSLog(@"Do real error checking here");
+    
+    width = CGImageGetWidth(image.CGImage);
+    height = CGImageGetHeight(image.CGImage);
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+    imageData = malloc( height * width * 4 );
+    _pContext = CGBitmapContextCreate( imageData, width, height, 8, 4 * width, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big );
+    CGColorSpaceRelease( colorSpace );
+    CGContextClearRect( _pContext, CGRectMake( 0, 0, width, height ) );
+    CGContextTranslateCTM( _pContext, 0, height - height );
+    CGContextDrawImage( _pContext, CGRectMake( 0, 0, width, height ), image.CGImage );
+    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+    
+    CGContextRelease(_pContext);
+    
+    free(imageData);
+    [image release];
+    [texData release];
+    
+    txtPath = [[NSBundle mainBundle] pathForResource:@"atlas3" ofType:@"txt"];
+    atlasTxt = [txtPath UTF8String];
+    
+    _atlas_file = fopen(atlasTxt, "r");
+    _atlas_len = 0;
+    if (_atlas_file)
+    {
+        _atlas_len = fread(_read_buffer, 1, 10240, _atlas_file);
+    }
+    fclose(_atlas_file);
+    j::Engine::Instance()->setTextureAtlas(texName, _read_buffer, _atlas_len);
+    
+    
+    //atlas4
+    glGenTextures(4, &texName);
+    glBindTexture(GL_TEXTURE_2D, texName);
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
+    path = [[NSBundle mainBundle] pathForResource:@"atlas4" ofType:@"png"];
+    texData = [[NSData alloc] initWithContentsOfFile:path];
+    image = [[UIImage alloc] initWithData:texData];
+    if (image == nil)
+        NSLog(@"Do real error checking here");
+    
+    width = CGImageGetWidth(image.CGImage);
+    height = CGImageGetHeight(image.CGImage);
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+    imageData = malloc( height * width * 4 );
+    _pContext = CGBitmapContextCreate( imageData, width, height, 8, 4 * width, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big );
+    CGColorSpaceRelease( colorSpace );
+    CGContextClearRect( _pContext, CGRectMake( 0, 0, width, height ) );
+    CGContextTranslateCTM( _pContext, 0, height - height );
+    CGContextDrawImage( _pContext, CGRectMake( 0, 0, width, height ), image.CGImage );
+    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+    
+    CGContextRelease(_pContext);
+    
+    free(imageData);
+    [image release];
+    [texData release];
+    
+    txtPath = [[NSBundle mainBundle] pathForResource:@"atlas4" ofType:@"txt"];
+    atlasTxt = [txtPath UTF8String];
+    
+    _atlas_file = fopen(atlasTxt, "r");
+    _atlas_len = 0;
+    if (_atlas_file)
+    {
+        _atlas_len = fread(_read_buffer, 1, 10240, _atlas_file);
+    }
+    fclose(_atlas_file);
+    j::Engine::Instance()->setTextureAtlas(texName, _read_buffer, _atlas_len);
 }
 
 - (void) start
@@ -200,7 +338,7 @@ static jViewController * instance;
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    Engine * engine = Engine::Instance();
+    j::Engine * engine = j::Engine::Instance();
     engine->numOfTouches = 0;
     
     numOfTouches = 0;
@@ -226,7 +364,7 @@ static jViewController * instance;
 
 -(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    Engine * engine = Engine::Instance();
+    j::Engine * engine = j::Engine::Instance();
     engine->numOfTouches = 0;
     
     numOfTouches = 0;
@@ -254,7 +392,7 @@ static jViewController * instance;
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    Engine * engine = Engine::Instance();
+    j::Engine * engine = j::Engine::Instance();
     engine->numOfTouches = 0;
     
     numOfTouches = 0;
@@ -283,7 +421,7 @@ static jViewController * instance;
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    Engine * engine = Engine::Instance();
+    j::Engine * engine = j::Engine::Instance();
     engine->numOfTouches = 0;
     
     numOfTouches = 0;

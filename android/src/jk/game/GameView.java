@@ -40,7 +40,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import jk.j_JNILib;
 import jk.j_TextureAtlas;
-import jk.jEngine.swipeblocks.R;
+import jk.jEngine.jQuiz.R;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -317,9 +317,23 @@ class GameView extends GLSurfaceView {
 				j_JNILib.setTutorial(mGameActivity.getTutorial());
 				isResume = true;
 				
-				j_TextureAtlas a = new j_TextureAtlas(mContext, R.raw.atlas);
-				String atlas = a.getAtlas(R.raw.atlas_text);
+				j_TextureAtlas a = new j_TextureAtlas(mContext, R.raw.atlas1, 1);
+				String atlas = a.getAtlas(R.raw.atlas1_text);
 				j_JNILib.setAtlas(a.mTextureID, atlas, atlas.length());
+				
+				a = new j_TextureAtlas(mContext, R.raw.atlas2, 2);
+				atlas = a.getAtlas(R.raw.atlas2_text);
+				j_JNILib.setAtlas(a.mTextureID, atlas, atlas.length());
+				
+				a = new j_TextureAtlas(mContext, R.raw.atlas3, 3);
+				atlas = a.getAtlas(R.raw.atlas3_text);
+				j_JNILib.setAtlas(a.mTextureID, atlas, atlas.length());
+				
+				a = new j_TextureAtlas(mContext, R.raw.atlas4, 4);
+				atlas = a.getAtlas(R.raw.atlas4_text);
+				j_JNILib.setAtlas(a.mTextureID, atlas, atlas.length());
+				
+				j_JNILib.startWithMainScene();
 			} else {
 				j_JNILib.resume(-1, -1);
 			}
