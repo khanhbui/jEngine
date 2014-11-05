@@ -33,7 +33,7 @@ Font::~Font()
 
 void Font::__calculateWidth()
 {
-    int len;
+    size_t len;
     if (!__text || (len = strlen(__text)) == 0)
     {
         w = 0;
@@ -41,7 +41,7 @@ void Font::__calculateWidth()
     }
     else
     {
-        w = (len - 1) * __border;
+        w = static_cast<int>((len - 1) * __border);
         h = 0;
         for (int i = 0; i < len; i++)
         {
@@ -86,7 +86,7 @@ void Font::_draw()
         yy = -h >> 1;
     }
 
-    for (int i = 0, len = strlen(__text); i < len; i++)
+    for (size_t i = 0, len = strlen(__text); i < len; i++)
     {
         char index = __text[i];
         Texture * image = __images[index];

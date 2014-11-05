@@ -227,12 +227,12 @@ void Engine::Delete()
     RELEASE(Engine::_instance);
 }
 
-void Engine::setTextureAtlas(unsigned int TextureId, const char * Description, int NumOfChars)
+void Engine::setTextureAtlas(unsigned int TextureId, const char * Description, size_t NumOfChars)
 {
     addTextureAtlas(TextureId, Description, NumOfChars);
 }
 
-void Engine::addTextureAtlas(unsigned int TextureId, const char * Description, int NumOfChars)
+void Engine::addTextureAtlas(unsigned int TextureId, const char * Description, size_t NumOfChars)
 {
     __GL->setTextureAtlas(TextureId);
     

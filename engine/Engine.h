@@ -12,6 +12,7 @@
 #include "Ref.h"
 #include "Macro.h"
 #include "GL.h"
+#include "FileUtils.h"
 
 NAMESPACE_BEGIN
 
@@ -67,8 +68,8 @@ public:
     Texture * findImage(const char * FileName);
 
     void resetTexture(unsigned int TextureId, unsigned int PrevTextureId);
-    void setTextureAtlas(unsigned int TextureId, const char * Description = NULL, int NumOfChars = 0);
-    void addTextureAtlas(unsigned int TextureId, const char * Description = NULL, int NumOfChars = 0);
+    void setTextureAtlas(unsigned int TextureId, const char * Description = NULL, size_t NumOfChars = 0);
+    void addTextureAtlas(unsigned int TextureId, const char * Description = NULL, size_t NumOfChars = 0);
 
     GL * renderer();
 

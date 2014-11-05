@@ -20,9 +20,9 @@ class NotifierInterface;
 class ObserverRecord : public Ref
 {
 public:
-    ObserverRecord(int Id, NotifierInterface * Target);
+    ObserverRecord(size_t Id, NotifierInterface * Target);
 
-    int id;
+    size_t id;
     NotifierInterface * target;
 };
 

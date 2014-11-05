@@ -28,8 +28,8 @@ private:
 
     void __notify(Message * Message);
 
-    int __addObserver(ObserverInterface * obj);
-    void __deleteObserver(int Id);
+    size_t __addObserver(ObserverInterface * obj);
+    void __deleteObserver(size_t Id);
 
 protected:
     NotifierInterface();

@@ -36,13 +36,13 @@ void NotifierInterface::__notify(Message * Message)
     }
 }
 
-int NotifierInterface::__addObserver(ObserverInterface * obj)
+size_t NotifierInterface::__addObserver(ObserverInterface * obj)
 {
     __observers->push_back(obj);
     return __observers->size();
 }
 
-void NotifierInterface::__deleteObserver(int Id)
+void NotifierInterface::__deleteObserver(size_t Id)
 {
 }
 

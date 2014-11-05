@@ -108,7 +108,7 @@ void AutoreleasePool::addObject(Ref * object)
 void AutoreleasePool::clear()
 {
     _isClearing = true;
-    for (int i = 0, size = _managedObjectArray.size(); i < size; ++i)
+    for (size_t i = 0, size = _managedObjectArray.size(); i < size; ++i)
     {
         Ref * obj = _managedObjectArray[i];
         obj->release();
@@ -119,7 +119,7 @@ void AutoreleasePool::clear()
 
 bool AutoreleasePool::contains(Ref * object) const
 {
-    for (int i = 0, size = _managedObjectArray.size(); i < size; ++i)
+    for (size_t i = 0, size = _managedObjectArray.size(); i < size; ++i)
     {
         if (object == _managedObjectArray[i])
         {
@@ -133,7 +133,7 @@ void AutoreleasePool::dump()
 {
     LOGD("autorelease pool: %s, number of managed object %d\n", _name.c_str(), static_cast<int>(_managedObjectArray.size()));
     LOGD("%20s%20s%20s\n", "Object pointer", "Object name", "Reference count");
-    for (int i = 0, size = _managedObjectArray.size(); i < size; ++i)
+    for (size_t i = 0, size = _managedObjectArray.size(); i < size; ++i)
     {
         Ref * obj = _managedObjectArray[i];
         LOGD("%20p%20s%20u\n", obj, obj->getName(), obj->getReferenceCount());
@@ -190,7 +190,7 @@ AutoreleasePool * PoolManager::getCurrentPool() const
 
 bool PoolManager::isObjectInPools(Ref * obj) const
 {
-    for (int i = 0, size = _releasePoolStack.size(); i < size; ++i)
+    for (size_t i = 0, size = _releasePoolStack.size(); i < size; ++i)
     {
         AutoreleasePool * pool = _releasePoolStack[i];
         if (pool->contains(obj))

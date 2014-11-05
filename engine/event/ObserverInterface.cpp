@@ -11,7 +11,7 @@
 
 NAMESPACE_USING
 
-ObserverRecord::ObserverRecord(int Id, NotifierInterface * Target) : Ref("ObserverRecord"),
+ObserverRecord::ObserverRecord(size_t Id, NotifierInterface * Target) : Ref("ObserverRecord"),
 id(Id),
 target(Target)
 {
@@ -31,7 +31,7 @@ void ObserverInterface::beginObserve(NotifierInterface * Target)
     int index = __checkObserveRecord(Target);
     if (index < 0)
     {
-        int id = Target->__addObserver(this);
+        size_t id = Target->__addObserver(this);
         
         ObserverRecord * info = new ObserverRecord(id, Target);
         __observeRecord->push_back(info);

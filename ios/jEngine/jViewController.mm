@@ -9,9 +9,10 @@
 #import "jViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import <GLKit/GLKit.h>
 
 #import "Engine.h"
-#import "MainScene.h"
+#import "jFont/MainScene.h"
 
 @implementation jViewController
 
@@ -107,12 +108,13 @@ static jViewController * instance;
     
     numOfTouches = 0;
 
+    j::FileUtils::Create([[[NSBundle mainBundle] resourcePath] UTF8String]);
     j::Engine::Create();
     j::Engine::Instance()->setup();
     
     [self setTextureAtlas];
 
-    j::Engine::Instance()->setDefaultScene(new jQuiz::MainScene(false));
+    j::Engine::Instance()->setDefaultScene(new jFont::MainScene(false));
 }
 
 - (void) setTextureAtlas
@@ -126,13 +128,14 @@ static jViewController * instance;
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"atlas1" ofType:@"png"];
+    LOGD("path %s", [path UTF8String]);
     NSData *texData = [[NSData alloc] initWithContentsOfFile:path];
     UIImage *image = [[UIImage alloc] initWithData:texData];
     if (image == nil)
         NSLog(@"Do real error checking here");
     
-    GLuint width = CGImageGetWidth(image.CGImage);
-    GLuint height = CGImageGetHeight(image.CGImage);
+    GLuint width = static_cast<GLuint>(CGImageGetWidth(image.CGImage));
+    GLuint height = static_cast<GLuint>(CGImageGetHeight(image.CGImage));
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     void *imageData = malloc( height * width * 4 );
     CGContextRef _pContext = CGBitmapContextCreate( imageData, width, height, 8, 4 * width, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big );
@@ -154,7 +157,7 @@ static jViewController * instance;
     
     char _read_buffer[10240];
     FILE * _atlas_file = fopen(atlasTxt, "r");
-    int _atlas_len = 0;
+    size_t _atlas_len = 0;
     if (_atlas_file)
     {
         _atlas_len = fread(_read_buffer, 1, 10240, _atlas_file);
@@ -176,8 +179,8 @@ static jViewController * instance;
     if (image == nil)
         NSLog(@"Do real error checking here");
     
-    width = CGImageGetWidth(image.CGImage);
-    height = CGImageGetHeight(image.CGImage);
+    width = static_cast<GLuint>(CGImageGetWidth(image.CGImage));
+    height = static_cast<GLuint>(CGImageGetHeight(image.CGImage));
     colorSpace = CGColorSpaceCreateDeviceRGB();
     imageData = malloc( height * width * 4 );
     _pContext = CGBitmapContextCreate( imageData, width, height, 8, 4 * width, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big );
@@ -220,8 +223,8 @@ static jViewController * instance;
     if (image == nil)
         NSLog(@"Do real error checking here");
     
-    width = CGImageGetWidth(image.CGImage);
-    height = CGImageGetHeight(image.CGImage);
+    width = static_cast<GLuint>(CGImageGetWidth(image.CGImage));
+    height = static_cast<GLuint>(CGImageGetHeight(image.CGImage));
     colorSpace = CGColorSpaceCreateDeviceRGB();
     imageData = malloc( height * width * 4 );
     _pContext = CGBitmapContextCreate( imageData, width, height, 8, 4 * width, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big );
@@ -264,8 +267,8 @@ static jViewController * instance;
     if (image == nil)
         NSLog(@"Do real error checking here");
     
-    width = CGImageGetWidth(image.CGImage);
-    height = CGImageGetHeight(image.CGImage);
+    width = static_cast<GLuint>(CGImageGetWidth(image.CGImage));
+    height = static_cast<GLuint>(CGImageGetHeight(image.CGImage));
     colorSpace = CGColorSpaceCreateDeviceRGB();
     imageData = malloc( height * width * 4 );
     _pContext = CGBitmapContextCreate( imageData, width, height, 8, 4 * width, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big );

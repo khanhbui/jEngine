@@ -10,29 +10,29 @@
 	<string>jEngine</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>D6ED0E79-4CC2-4920-A65B-F96E7DAF1917</key>
+		<key>19798DCB19B1FC7F41785B35D9A142C22C1A5296</key>
 		<string>https://github.com/khanhbui/jEngine.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ios/jEngine/jEngine.xcodeproj/project.xcworkspace</string>
+	<string>ios/jEngine.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>D6ED0E79-4CC2-4920-A65B-F96E7DAF1917</key>
-		<string>../../../..</string>
+		<key>19798DCB19B1FC7F41785B35D9A142C22C1A5296</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/khanhbui/jEngine.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D6ED0E79-4CC2-4920-A65B-F96E7DAF1917</string>
+	<string>19798DCB19B1FC7F41785B35D9A142C22C1A5296</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D6ED0E79-4CC2-4920-A65B-F96E7DAF1917</string>
+			<string>19798DCB19B1FC7F41785B35D9A142C22C1A5296</string>
 			<key>IDESourceControlWCCName</key>
 			<string>jEngine</string>
 		</dict>
